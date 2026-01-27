@@ -120,29 +120,22 @@ export default function Home() {
           <div className="section-header">
             <div>
               <p className="eyebrow">Upcoming</p>
-              <h2 className="section-title">Gatherings on the calendar</h2>
+              <h2 className="section-title">Next gathering</h2>
             </div>
             <Link className="button outline" href="/events">
-              Full events list
+              View event details
             </Link>
           </div>
-          <div className="grid two">
-            <div className="card">
-              <span className="badge">February</span>
-              <h3>Harvest &amp; Hues Supper</h3>
-              <p className="muted">
-                A seasonal menu paired with Old World pours, styled by local
-                floral artisans.
-              </p>
-            </div>
-            <div className="card">
-              <span className="badge">March</span>
-              <h3>The Collector&apos;s Salon</h3>
-              <p className="muted">
-                An intimate evening of cork lore, cellar discoveries, and
-                stories from the region.
-              </p>
-            </div>
+          <div className="card">
+            <span className="badge">February 14</span>
+            <h3>The Cellar Sessions: Winter Edition</h3>
+            <p className="muted">
+              A candlelit tasting experience with local sommeliers, seasonal
+              pairings, and curated storytelling. Limited to 24 guests.
+            </p>
+            <Link className="button" href="/events">
+              Save Your Spot
+            </Link>
           </div>
         </div>
       </section>
@@ -170,16 +163,17 @@ export default function Home() {
         <div className="container">
           <div className="card contact-card">
             <div>
-              <p className="eyebrow">Stay close</p>
-              <h2 className="section-title">Join the inner circle</h2>
+              <p className="eyebrow">Become part of the community</p>
+              <h2 className="section-title">Join us at an event</h2>
               <p className="muted">
-                For invitations, collaborations, and private tastings, reach
-                out or follow along for the latest releases.
+                The Cork Conclave community is built on shared experiences.
+                Attend one of our gatherings to connect with fellow enthusiasts,
+                and become part of our inner circle.
               </p>
             </div>
             <div className="cta-row">
-              <Link className="button" href="/contact">
-                Contact the team
+              <Link className="button" href="/events">
+                View upcoming event
               </Link>
               <a
                 className="button outline"
@@ -187,7 +181,7 @@ export default function Home() {
                 target="_blank"
                 rel="noreferrer"
               >
-                Instagram
+                Follow on Instagram
               </a>
             </div>
           </div>

@@ -4,49 +4,51 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Events",
   description:
-    "Explore the upcoming Cork Conclave gatherings, tastings, and salons in Cork City.",
+    "Explore the upcoming Cork Conclave gathering in Cork City.",
   alternates: {
     canonical: `${site.url}/events`,
   },
 };
 
-const events = [
-  {
-    month: "January",
-    title: "The Grape Reset",
-    description:
-      "A seasonal chef's table with rare pours and a moody floral installation.",
-  },
-  {
-    month: "March",
-    title: "The Collector's Salon",
-    description:
-      "Private tasting with archivist notes, artisan pairings, and conversation.",
-  },
-  {
-    month: "April",
-    title: "Cork & Canvas",
-    description:
-      "An evening of live illustration, soundscapes, and a curated tasting flight.",
-  },
-  {
-    month: "May",
-    title: "Golden Hour Terrace",
-    description:
-      "Sunset gathering with coastal pours, light bites, and a live quartet.",
-  },
-];
+// Single upcoming event
+const upcomingEvent = {
+  title: "The Cellar Sessions: Winter Edition",
+  date: "Friday, February 14, 2025",
+  time: "7:30 PM",
+  location: `The Warehouse Loft, ${site.contact.city}`,
+  description:
+    "A candlelit tasting experience with local sommeliers, seasonal pairings, and curated storytelling. Join us for an intimate evening celebrating cork culture and community.",
+  details: [
+    "Limited to 24 guests for an intimate experience",
+    "Curated wine selection from regional vintages",
+    "Artisan food pairings by local chefs",
+    "Expert-led tasting with sommelier insights",
+    "Meet fellow cork enthusiasts and collectors",
+  ],
+  ticketLink: "https://www.eventbrite.com/e/cork-conclave-tickets", // Update with actual ticket link
+};
 
 export default function EventsPage() {
-  const eventsJsonLd = {
+  const eventJsonLd = {
     "@context": "https://schema.org",
-    "@type": "ItemList",
-    itemListElement: events.map((event, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      name: event.title,
-      description: event.description,
-    })),
+    "@type": "Event",
+    name: upcomingEvent.title,
+    description: upcomingEvent.description,
+    startDate: upcomingEvent.date,
+    location: {
+      "@type": "Place",
+      name: upcomingEvent.location,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: site.contact.city,
+        addressCountry: site.contact.country,
+      },
+    },
+    organizer: {
+      "@type": "Organization",
+      name: site.name,
+      url: site.url,
+    },
   };
 
   return (
@@ -54,38 +56,80 @@ export default function EventsPage() {
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(eventsJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(eventJsonLd) }}
       />
       <section className="hero">
         <div className="container hero-grid">
           <div>
-            <p className="eyebrow">Events</p>
-            <h1 className="hero-title">A calendar of curated experiences</h1>
-            <p className="hero-subtitle">
-              Each gathering is designed to feel intimate, immersive, and
-              effortlessly refined. Invitations open in small waves.
-            </p>
+            <p className="eyebrow">Upcoming Event</p>
+            <h1 className="hero-title">{upcomingEvent.title}</h1>
+            <p className="hero-subtitle">{upcomingEvent.description}</p>
+            <div className="cta-row">
+              <a
+                className="button"
+                href={upcomingEvent.ticketLink}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Save Your Spot
+              </a>
+              <a
+                className="button outline"
+                href={site.socials.instagram}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Follow Updates
+              </a>
+            </div>
           </div>
           <div className="hero-panel">
-            <h2 className="section-title">Member preview</h2>
-            <p className="muted">
-              RSVP access and private tastings are shared first with our inner
-              circle. Follow along or reach out for early invitations.
-            </p>
+            <h2 className="section-title">Event Details</h2>
+            <ul>
+              <li><strong>Date:</strong> {upcomingEvent.date}</li>
+              <li><strong>Time:</strong> {upcomingEvent.time}</li>
+              <li><strong>Location:</strong> {upcomingEvent.location}</li>
+            </ul>
           </div>
         </div>
       </section>
 
       <section className="section tight">
         <div className="container">
+          <div className="section-header">
+            <div>
+              <p className="eyebrow">What to expect</p>
+              <h2 className="section-title">An evening designed for connection</h2>
+            </div>
+          </div>
           <div className="grid two">
-            {events.map((event) => (
-              <div className="card" key={event.title}>
-                <span className="badge">{event.month}</span>
-                <h3>{event.title}</h3>
-                <p className="muted">{event.description}</p>
-              </div>
-            ))}
+            <div className="card">
+              <h3>The Experience</h3>
+              <ul>
+                {upcomingEvent.details.map((detail, index) => (
+                  <li key={index}>{detail}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="card">
+              <h3>Join the Gathering</h3>
+              <p className="muted">
+                Each Cork Conclave event is designed to feel intimate, immersive, and
+                effortlessly refined. Spaces are limited to maintain the personal atmosphere.
+              </p>
+              <p className="muted">
+                Secure your spot early, and become part of our community of collectors,
+                newcomers, and the curious.
+              </p>
+              <a
+                className="button"
+                href={upcomingEvent.ticketLink}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Get Tickets
+              </a>
+            </div>
           </div>
         </div>
       </section>

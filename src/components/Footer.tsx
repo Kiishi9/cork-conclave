@@ -32,6 +32,9 @@ export default function Footer() {
         <div>
           <p className="eyebrow">Connect</p>
           <div className="grid">
+            <a className="nav-link" href={`mailto:${site.contact.email}`}>
+              Email
+            </a>
             <a
               className="nav-link"
               href={site.socials.instagram}
@@ -40,8 +43,13 @@ export default function Footer() {
             >
               Instagram
             </a>
-            <a className="nav-link" href={`mailto:${site.contact.email}`}>
-              {site.contact.email}
+            <a
+              className="nav-link"
+              href={site.socials.tiktok}
+              target="_blank"
+              rel="noreferrer"
+            >
+              TikTok
             </a>
             <p className="muted">
               {site.contact.city}, {site.contact.country}

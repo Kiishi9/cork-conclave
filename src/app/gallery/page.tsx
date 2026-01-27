@@ -10,6 +10,40 @@ export const metadata: Metadata = {
   },
 };
 
+// Gallery organized by event
+const eventGalleries = [
+  {
+    eventName: "The Cellar Sessions: Winter Edition",
+    date: "January 2025",
+    photos: [
+      { url: "/gallery/cellar-sessions-1.jpg", alt: "Candlelit table setting" },
+      { url: "/gallery/cellar-sessions-2.jpg", alt: "Wine tasting in progress" },
+      { url: "/gallery/cellar-sessions-3.jpg", alt: "Guests enjoying the evening" },
+      { url: "/gallery/cellar-sessions-4.jpg", alt: "Sommelier presenting wines" },
+    ],
+  },
+  {
+    eventName: "Harvest & Hues Supper",
+    date: "February 2025",
+    photos: [
+      { url: "/gallery/harvest-hues-1.jpg", alt: "Floral table arrangements" },
+      { url: "/gallery/harvest-hues-2.jpg", alt: "Seasonal menu pairing" },
+      { url: "/gallery/harvest-hues-3.jpg", alt: "Evening atmosphere" },
+    ],
+  },
+  {
+    eventName: "The Collector's Salon",
+    date: "March 2025",
+    photos: [
+      { url: "/gallery/collectors-salon-1.jpg", alt: "Intimate conversation setting" },
+      { url: "/gallery/collectors-salon-2.jpg", alt: "Vintage wine display" },
+      { url: "/gallery/collectors-salon-3.jpg", alt: "Guests mingling" },
+      { url: "/gallery/collectors-salon-4.jpg", alt: "Tasting notes setup" },
+      { url: "/gallery/collectors-salon-5.jpg", alt: "Evening ambiance" },
+    ],
+  },
+];
+
 export default function GalleryPage() {
   return (
     <>
@@ -19,7 +53,7 @@ export default function GalleryPage() {
             <p className="eyebrow">Gallery</p>
             <h1 className="hero-title">Atmosphere, captured</h1>
             <p className="hero-subtitle">
-              A collection of mood, texture, and storytelling. Visit Instagram
+              A collection of mood, texture, and storytelling from our past events. Visit Instagram
               for the full visual diary.
             </p>
           </div>
@@ -33,15 +67,33 @@ export default function GalleryPage() {
         </div>
       </section>
 
-      <section className="section tight">
-        <div className="container">
-          <div className="grid three">
-            {Array.from({ length: 9 }).map((_, index) => (
-              <div className="gallery-tile" key={`tile-${index}`} />
-            ))}
+      {eventGalleries.map((event) => (
+        <section className="section tight" key={event.eventName}>
+          <div className="container">
+            <div className="section-header">
+              <div>
+                <p className="eyebrow">{event.date}</p>
+                <h2 className="section-title">{event.eventName}</h2>
+              </div>
+            </div>
+            <div className="grid three">
+              {event.photos.map((photo, index) => (
+                <div
+                  className="gallery-tile"
+                  key={`${event.eventName}-${index}`}
+                  style={{
+                    backgroundImage: `url(${photo.url})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center'
+                  }}
+                  role="img"
+                  aria-label={photo.alt}
+                />
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      ))}
     </>
   );
 }
