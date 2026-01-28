@@ -52,11 +52,16 @@ export default function ContactPage() {
                 target="_blank"
                 rel="noreferrer"
               >
-                Instagram
+                Check out what we’re up to on Instagram
               </a>
-              <p className="muted">
-                {site.contact.city}, {site.contact.country}
-              </p>
+                <a
+                className="button outline"
+                href={site.socials.tiktok}
+                target="_blank"
+                rel="noreferrer"
+              >
+                We sometimes post fun videos on Tiktok
+              </a>
             </div>
           </div>
         </div>
