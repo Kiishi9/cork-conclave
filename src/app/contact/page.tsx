@@ -16,11 +16,10 @@ export default function ContactPage() {
       <section className="hero">
         <div className="container hero-grid">
           <div>
-            <p className="eyebrow">Contact</p>
-            <h1 className="hero-title">Let&apos;s plan your next gathering</h1>
+            <p className="eyebrow">Join Us</p>
+            <h1 className="hero-title">We would love to be friends.</h1>
             <p className="hero-subtitle">
-              Reach out for private tastings, partnerships, or intimate event
-              collaborations in Cork and beyond.
+             Reach out to us with your invitations and collaborations, or just register to attend one of our events. We’d love to hear from you. 
             </p>
           </div>
           <div className="hero-panel">
