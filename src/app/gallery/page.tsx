@@ -13,8 +13,8 @@ export const metadata: Metadata = {
 // Gallery organized by event
 const eventGalleries = [
   {
-    eventName: "The Cellar Sessions: Winter Edition",
-    date: "January 2025",
+    eventName: "Pour Perspective",
+    date: "November 2024",
     photos: [
       { url: "/gallery/cellar-sessions-1.jpg", alt: "Candlelit table setting" },
       { url: "/gallery/cellar-sessions-2.jpg", alt: "Wine tasting in progress" },
@@ -23,8 +23,8 @@ const eventGalleries = [
     ],
   },
   {
-    eventName: "Harvest & Hues Supper",
-    date: "February 2025",
+    eventName: "Clink & Chill",
+    date: "December 2024",
     photos: [
       { url: "/gallery/harvest-hues-1.jpg", alt: "Floral table arrangements" },
       { url: "/gallery/harvest-hues-2.jpg", alt: "Seasonal menu pairing" },
@@ -32,8 +32,8 @@ const eventGalleries = [
     ],
   },
   {
-    eventName: "The Collector's Salon",
-    date: "March 2025",
+    eventName: "Uncorked: A Love Affair",
+    date: "February 2025",
     photos: [
       { url: "/gallery/collectors-salon-1.jpg", alt: "Intimate conversation setting" },
       { url: "/gallery/collectors-salon-2.jpg", alt: "Vintage wine display" },
@@ -42,6 +42,107 @@ const eventGalleries = [
       { url: "/gallery/collectors-salon-5.jpg", alt: "Evening ambiance" },
     ],
   },
+  {
+    eventName: "Escandalo",
+    date: "March 2025",
+    photos: [
+      { url: "/gallery/cellar-sessions-1.jpg", alt: "Candlelit table setting" },
+      { url: "/gallery/cellar-sessions-2.jpg", alt: "Wine tasting in progress" },
+      { url: "/gallery/cellar-sessions-3.jpg", alt: "Guests enjoying the evening" },
+      { url: "/gallery/cellar-sessions-4.jpg", alt: "Sommelier presenting wines" },
+    ],
+  },
+  {
+    eventName: "4-1-9",
+    date: "April 2025",
+    photos: [
+      { url: "/gallery/cellar-sessions-1.jpg", alt: "Candlelit table setting" },
+      { url: "/gallery/cellar-sessions-2.jpg", alt: "Wine tasting in progress" },
+      { url: "/gallery/cellar-sessions-3.jpg", alt: "Guests enjoying the evening" },
+      { url: "/gallery/cellar-sessions-4.jpg", alt: "Sommelier presenting wines" },
+    ],
+  },
+  {
+    eventName: "Sips Don't Lie",
+    date: "May 2025",
+    photos: [
+      { url: "/gallery/cellar-sessions-1.jpg", alt: "Candlelit table setting" },
+      { url: "/gallery/cellar-sessions-2.jpg", alt: "Wine tasting in progress" },
+      { url: "/gallery/cellar-sessions-3.jpg", alt: "Guests enjoying the evening" },
+      { url: "/gallery/cellar-sessions-4.jpg", alt: "Sommelier presenting wines" },
+    ],
+  },
+  {
+    eventName: "Scarlet Accord",
+    date: "June 2025",
+    photos: [
+      { url: "/gallery/cellar-sessions-1.jpg", alt: "Candlelit table setting" },
+      { url: "/gallery/cellar-sessions-2.jpg", alt: "Wine tasting in progress" },
+      { url: "/gallery/cellar-sessions-3.jpg", alt: "Guests enjoying the evening" },
+      { url: "/gallery/cellar-sessions-4.jpg", alt: "Sommelier presenting wines" },
+    ],
+  },
+  {
+    eventName: "Grape Outdoor",
+    date: "July 2025",
+    photos: [
+      { url: "/gallery/cellar-sessions-1.jpg", alt: "Candlelit table setting" },
+      { url: "/gallery/cellar-sessions-2.jpg", alt: "Wine tasting in progress" },
+      { url: "/gallery/cellar-sessions-3.jpg", alt: "Guests enjoying the evening" },
+      { url: "/gallery/cellar-sessions-4.jpg", alt: "Sommelier presenting wines" },
+    ],
+  },
+  {
+    eventName: "Lollapalooza",
+    date: "August 2025",
+    photos: [
+      { url: "/gallery/cellar-sessions-1.jpg", alt: "Candlelit table setting" },
+      { url: "/gallery/cellar-sessions-2.jpg", alt: "Wine tasting in progress" },
+      { url: "/gallery/cellar-sessions-3.jpg", alt: "Guests enjoying the evening" },
+      { url: "/gallery/cellar-sessions-4.jpg", alt: "Sommelier presenting wines" },
+    ],
+  },
+  {
+    eventName: "Trivia Night",
+    date: "September 2025",
+    photos: [
+      { url: "/gallery/cellar-sessions-1.jpg", alt: "Candlelit table setting" },
+      { url: "/gallery/cellar-sessions-2.jpg", alt: "Wine tasting in progress" },
+      { url: "/gallery/cellar-sessions-3.jpg", alt: "Guests enjoying the evening" },
+      { url: "/gallery/cellar-sessions-4.jpg", alt: "Sommelier presenting wines" },
+    ],
+  },
+    {
+    eventName: "Amebo Lounge",
+    date: "October 2025",
+    photos: [
+      { url: "/gallery/cellar-sessions-1.jpg", alt: "Candlelit table setting" },
+      { url: "/gallery/cellar-sessions-2.jpg", alt: "Wine tasting in progress" },
+      { url: "/gallery/cellar-sessions-3.jpg", alt: "Guests enjoying the evening" },
+      { url: "/gallery/cellar-sessions-4.jpg", alt: "Sommelier presenting wines" },
+    ],
+  },
+    {
+    eventName: "From Palette to Palate",
+    date: "November 2025",
+    photos: [
+      { url: "/gallery/cellar-sessions-1.jpg", alt: "Candlelit table setting" },
+      { url: "/gallery/cellar-sessions-2.jpg", alt: "Wine tasting in progress" },
+      { url: "/gallery/cellar-sessions-3.jpg", alt: "Guests enjoying the evening" },
+      { url: "/gallery/cellar-sessions-4.jpg", alt: "Sommelier presenting wines" },
+    ],
+  },
+    {
+    eventName: "The Grape Reset",
+    date: "January 2026",
+    photos: [
+      { url: "/gallery/cellar-sessions-1.jpg", alt: "Candlelit table setting" },
+      { url: "/gallery/cellar-sessions-2.jpg", alt: "Wine tasting in progress" },
+      { url: "/gallery/cellar-sessions-3.jpg", alt: "Guests enjoying the evening" },
+      { url: "/gallery/cellar-sessions-4.jpg", alt: "Sommelier presenting wines" },
+    ],
+  },
+  
 ];
 
 export default function GalleryPage() {

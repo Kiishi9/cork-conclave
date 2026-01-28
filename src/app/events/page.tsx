@@ -13,9 +13,9 @@ export const metadata: Metadata = {
 // Single upcoming event
 const upcomingEvent = {
   title: "The Cellar Sessions: Winter Edition",
-  date: "Friday, February 14, 2025",
-  time: "7:30 PM",
-  location: `The Warehouse Loft, ${site.contact.city}`,
+  date: "Saturday, February 21, 2025",
+  time: "4:00 PM",
+  location: `Pasta Xpress, 10 osuntokun Avenue Bodija, ${site.contact.city}`,
   description:
     "A candlelit tasting experience with local sommeliers, seasonal pairings, and curated storytelling. Join us for an intimate evening celebrating cork culture and community.",
   details: [
