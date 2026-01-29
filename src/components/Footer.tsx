@@ -18,9 +18,6 @@ export default function Footer() {
             <Link className="nav-link" href="/about">
               About
             </Link>
-            <Link className="nav-link" href="/events">
-              Events
-            </Link>
             <Link className="nav-link" href="/gallery">
               Gallery
             </Link>

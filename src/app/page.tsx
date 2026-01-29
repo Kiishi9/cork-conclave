@@ -22,11 +22,6 @@ export default function Home() {
       "@type": "Organization",
       name: site.name,
     },
-    potentialAction: {
-      "@type": "SearchAction",
-      target: `${site.url}/events`,
-      "query-input": "required name=search_term_string",
-    },
   };
 
   return (
@@ -55,9 +50,6 @@ export default function Home() {
               >
                 Follow on Instagram
               </a>
-              <Link className="button outline" href="/events">
-                View upcoming events
-              </Link>
             </div>
           </div>
           <div className="hero-panel">
@@ -80,9 +72,6 @@ export default function Home() {
               <li>Pasta Xpress Osuntokun Bodija, {site.contact.city}</li>
               <li>Limited Spots Available</li>
             </ul>
-            <Link className="button" href="/events">
-              Save Your Spot
-            </Link>
           </div>
         </div>
       </section>
@@ -153,11 +142,8 @@ export default function Home() {
               </p>
             </div>
             <div className="cta-row">
-              <Link className="button" href="/events">
-                View upcoming event
-              </Link>
               <a
-                className="button outline"
+                className="button"
                 href={site.socials.instagram}
                 target="_blank"
                 rel="noreferrer"
