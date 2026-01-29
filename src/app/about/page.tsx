@@ -32,10 +32,28 @@ Little did they know the ripple effects of that little decision. Since its debut
         </div>
       </section>
 
+      <section className="section">
+        <div className="container">
+          <div className="video-wrapper">
+            <iframe
+              src="https://www.youtube.com/embed/jNQXAC9IVRw"
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            ></iframe>
+          </div>
+        </div>
+      </section>
+
       <section className="section tight">
         <div className="container">
-          <div className="grid three">
+          <div className="section-header">
+            <h2 className="section-title">Meet the Curators</h2>
+          </div>
+          <div className="grid two">
             <div className="card">
+              <div className="gallery-tile" style={{ marginBottom: '1rem' }} />
               <h3>Intentional details</h3>
               <p className="muted">
                 We obsess over ambiance, sound, and menu flow to make every
@@ -43,19 +61,29 @@ Little did they know the ripple effects of that little decision. Since its debut
               </p>
             </div>
             <div className="card">
+              <div className="gallery-tile" style={{ marginBottom: '1rem' }} />
               <h3>Local collaborations</h3>
               <p className="muted">
                 From Cork chefs to floral studios, we spotlight talent
                 throughout the region.
               </p>
             </div>
-            <div className="card">
-              <h3>Community first</h3>
-              <p className="muted">
-                Our gatherings are curated yet welcoming, inviting both
-                collectors and new enthusiasts.
-              </p>
-            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section tight">
+        <div className="container">
+          <div className="section-header">
+            <h2 className="section-title">Where we meet</h2>
+          </div>
+          <div className="card">
+            <p className="muted">
+              At The Cork Conclave, we are nomads. We believe that there is so much out there to be experienced and we go searching for it. We meet in homes just as much as we meet in restaurants, art galleries, parks, theatres and a host of other public spaces.
+            </p>
+            <p className="muted">
+              Would you like to host us? Shoot us an email at <a href="mailto:thecorkconclave@gmail.com">thecorkconclave@gmail.com</a>
+            </p>
           </div>
         </div>
       </section>

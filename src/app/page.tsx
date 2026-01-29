@@ -22,11 +22,6 @@ export default function Home() {
       "@type": "Organization",
       name: site.name,
     },
-    potentialAction: {
-      "@type": "SearchAction",
-      target: `${site.url}/events`,
-      "query-input": "required name=search_term_string",
-    },
   };
 
   return (
@@ -55,12 +50,15 @@ export default function Home() {
               >
                 Follow on Instagram
               </a>
-              <Link className="button outline" href="/events">
-                View upcoming events
-              </Link>
             </div>
           </div>
           <div className="hero-panel">
+            <div className="event-image">
+              <img
+                src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=800&h=600&fit=crop"
+                alt="Love At First Sip event"
+              />
+            </div>
             <span className="badge">Next Gathering</span>
             <h2 className="section-title">
               Love At First Sip
@@ -112,31 +110,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section">
-        <div className="container">
-          <div className="section-header">
-            <div>
-              <p className="eyebrow">Upcoming</p>
-              <h2 className="section-title">Next gathering</h2>
-            </div>
-            <Link className="button outline" href="/events">
-              View event details
-            </Link>
-          </div>
-          <div className="card">
-            <span className="badge">February 14</span>
-            <h3>The Cellar Sessions: Winter Edition</h3>
-            <p className="muted">
-              A candlelit tasting experience with local sommeliers, seasonal
-              pairings, and curated storytelling. Limited to 24 guests.
-            </p>
-            <Link className="button" href="/events">
-              Save Your Spot
-            </Link>
-          </div>
-        </div>
-      </section>
-
       <section className="section tight">
         <div className="container">
           <div className="section-header">
@@ -169,11 +142,8 @@ export default function Home() {
               </p>
             </div>
             <div className="cta-row">
-              <Link className="button" href="/events">
-                View upcoming event
-              </Link>
               <a
-                className="button outline"
+                className="button"
                 href={site.socials.instagram}
                 target="_blank"
                 rel="noreferrer"
