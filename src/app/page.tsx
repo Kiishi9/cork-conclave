@@ -91,24 +91,21 @@ export default function Home() {
           </div>
           <div className="grid three">
             <div className="card">
-              <h3>Immersive tastings</h3>
+              <h3>Wine and laughter</h3>
               <p className="muted">
-                Guided evenings spotlighting regional vintages, local makers,
-                and the stories behind every bottle.
+                Evenings filled with good wine to help you shrug off the stress and relax. Over here, we’re all about the good life
               </p>
             </div>
             <div className="card">
-              <h3>Artisan collaborations</h3>
+              <h3>Community</h3>
               <p className="muted">
-                Partnerships with Cork creatives to craft thoughtful menus,
-                music, and design-led experiences.
+               We are not a wine club. We are a community of people who love wine, and love life. We come together every months to bask in our shared interests
               </p>
             </div>
             <div className="card">
-              <h3>Community gatherings</h3>
+              <h3>A culture of sharing</h3>
               <p className="muted">
-                Intimate salons and conversations to bring collectors,
-                newcomers, and the curious together.
+                At The Cork Conclave, everyone shows up with a bottle, to give the others a glimpse into who you are. And along with that, we share stories and joy. 
               </p>
             </div>
           </div>
