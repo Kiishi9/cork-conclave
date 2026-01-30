@@ -22,14 +22,7 @@ export default function ContactPage() {
              Reach out to us with your invitations and collaborations, or just register to attend one of our events. We’d love to hear from you. 
             </p>
           </div>
-          <div className="hero-panel">
-            <h2 className="section-title">Availability</h2>
-            <p className="muted">
-              We host a limited number of gatherings each month to maintain a
-              refined, personal feel. Inquire early for bespoke experiences.
-            </p>
-          </div>
-        </div>
+</div>
       </section>
 
       <section className="section tight">

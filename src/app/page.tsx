@@ -56,34 +56,36 @@ export default function Home() {
           <div className="hero-panel">
             <div className="event-image">
               <img
-                src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=800&h=600&fit=crop"
+                src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=600&h=800&fit=crop"
                 alt="Love At First Sip event"
               />
             </div>
-            <span className="badge">Next Conclave</span>
-            <h2 className="section-title">
-              Love At First Sip
-            </h2>
-            <p className="muted">
-             It's the season of love!
+            <div className="hero-panel-content">
+              <span className="badge">Next Conclave</span>
+              <h2 className="section-title">
+                Love At First Sip
+              </h2>
+              <p className="muted">
+               It's the season of love!
 And what is love without some good wine to spice up the moment.
-Join us at our love-themed Cork Conclave event this February, Love at First Sip. 
-            </p>
-            <ul>
-              <li>Saturday Feb 21, 4:00 PM</li>
-              <li>Pasta Xpress Osuntokun Bodija, {site.contact.city}</li>
-              <li>Limited Spots Available</li>
-            <div className="cta-row">
-              <a
-                className="button"
-                href={upcomingEvent.ticketLink}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Save Your Spot
-              </a>
+Join us at our love-themed Cork Conclave event this February, Love at First Sip.
+              </p>
+              <ul>
+                <li>Saturday Feb 21, 4:00 PM</li>
+                <li>Pasta Xpress Osuntokun Bodija, {site.contact.city}</li>
+                <li>Limited Spots Available</li>
+              <div className="cta-row">
+                <a
+                  className="button"
+                  href={upcomingEvent.ticketLink}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Save Your Spot
+                </a>
+              </div>
+              </ul>
             </div>
-            </ul>
           </div>
         </div>
       </section>
