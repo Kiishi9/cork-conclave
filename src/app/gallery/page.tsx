@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { site } from "@/lib/site";
-import EventCarousel from "@/components/EventCarousel";
+import GalleryGrid from "@/components/GalleryGrid";
 
 export const metadata: Metadata = {
   title: "Gallery",
@@ -81,11 +81,7 @@ export default function GalleryPage() {
 
       <section className="section">
         <div className="container">
-          <EventCarousel
-            images={galleryImages}
-            autoplay={true}
-            autoplayInterval={5000}
-          />
+          <GalleryGrid images={galleryImages} />
         </div>
       </section>
 

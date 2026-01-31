@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { site } from "@/lib/site";
-import EventCarousel from "@/components/EventCarousel";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -149,7 +148,16 @@ Join us at our love-themed Cork Conclave event this February.
               Explore the gallery
             </Link>
           </div>
-          <EventCarousel images={galleryPreview} autoplay={true} autoplayInterval={3500} />
+          <div className="gallery-preview-grid">
+            {galleryPreview.map((image, index) => (
+              <Link key={index} href="/gallery" className="gallery-preview-item">
+                <img src={image.url} alt={image.alt} />
+                <div className="gallery-preview-overlay">
+                  <span>View Gallery</span>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
