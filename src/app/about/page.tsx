@@ -58,18 +58,16 @@ export default function AboutPage() {
           <div className="grid two">
             <div className="card">
               <div className="gallery-tile" style={{ marginBottom: '1rem' }} />
-              <h3>Intentional details</h3>
+              <h3>Kiishi</h3>
               <p className="muted">
-                We obsess over ambiance, sound, and menu flow to make every
-                evening feel transportive.
+                When Kiishi is not drinking wine and making her women happy, she is building products that change the world.
               </p>
             </div>
             <div className="card">
               <div className="gallery-tile" style={{ marginBottom: '1rem' }} />
-              <h3>Local collaborations</h3>
+              <h3>Joe</h3>
               <p className="muted">
-                From Cork chefs to floral studios, we spotlight talent
-                throughout the region.
+                Joe likes wine just as much as she likes a million other weird things, and she writes just to keep the money flowing in.
               </p>
             </div>
           </div>

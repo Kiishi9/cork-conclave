@@ -18,9 +18,14 @@ export default function Home() {
   };
 
   // Preview gallery images from recent events
-  const galleryPreview = Array.from({ length: 8 }, (_, i) => ({
-    url: `/images/pour-perspective/${i + 1}.jpg`,
-    alt: `Gallery preview ${i + 1}`,
+  const galleryPreview = [
+    "IMG_0826.jpg",
+    "DSC02319.jpg",
+    "20251115_175804.jpg",
+    "IMG_1329.JPG",
+  ].map((filename) => ({
+    url: `/images/gallery/${filename}`,
+    alt: `Cork Conclave moment`,
   }));
 
   const websiteJsonLd = {
