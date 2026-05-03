@@ -3,7 +3,7 @@ import { site } from "@/lib/site";
 
 export default function Footer() {
   return (
-    <footer className="footer">
+    <footer className="footer mt-5 pt-5">
       <div className="container footer-grid">
         <div>
           <p className="logo">{site.name}</p>

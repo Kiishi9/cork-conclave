@@ -76,11 +76,13 @@ export default function RootLayout({
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }} />
         <div className="site">
           <Header />
-          <main id="main-content" className="main">
-            {children}
-            <Toaster />
-          </main>
-          <Footer />
+          <div className="site-body">
+            <main id="main-content" className="main">
+              {children}
+              <Toaster />
+            </main>
+            <Footer />
+          </div>
         </div>
         <Analytics />
         <SpeedInsights />
