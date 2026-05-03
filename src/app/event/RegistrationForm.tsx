@@ -97,7 +97,6 @@ export default function RegistrationForm({ className, amountInKobo }: Props) {
     e.preventDefault();
     if (isSubmitting) return;
 
-   
     let holdSubmittingUntilNavigation = false;
 
     const name = fullName.trim();
@@ -165,7 +164,7 @@ export default function RegistrationForm({ className, amountInKobo }: Props) {
           id: toastId,
           duration: 6000,
         });
-      
+
         setTimeout(() => {
           window.location.assign("/");
         }, 2500);

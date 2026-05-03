@@ -11,7 +11,7 @@ const navLinks = [
 
 export default function Header() {
   return (
-    <header className="header">
+    <header className="header flex items-center">
       <a href="#main-content" className="skip-link">
         Skip to content
       </a>
@@ -28,9 +28,10 @@ export default function Header() {
           </span>
           {/* <span className="logo-text">The Cork Conclave</span> */}
         </Link>
+
         <nav className="nav" aria-label="Primary">
           {navLinks.map((link) => (
-            <Link className="nav-link" key={link.href} href={link.href}>
+            <Link className="nav-link items-center flex" key={link.href} href={link.href}>
               {link.label}
             </Link>
           ))}
