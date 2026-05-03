@@ -63,7 +63,7 @@ export default async function Page() {
       <div className="relative z-10 grow px-4 pt-2 pb-10 sm:px-6 sm:pb-12 lg:px-8 lg:pt-4 lg:pb-16">
         <div className="mx-auto grid max-w-7xl grid-cols-1 items-start gap-8 lg:grid-cols-14 lg:gap-12">
           <div className="flex flex-col gap-6 lg:col-span-8">
-            <div className="group relative w-full overflow-hidden rounded-3xl shadow-2xl ring-1 ring-white/10 md:aspect-16/10 lg:aspect-video">
+            <div className="group relative w-full overflow-hidden rounded-3xl bg-[#1a1018] shadow-2xl ring-1 ring-white/10">
               <img
                 src={
                   bannerUrl.includes("?")
@@ -71,7 +71,7 @@ export default async function Page() {
                     : `${bannerUrl}?q=80&w=2000&auto=format`
                 }
                 alt={event.name}
-                className="block h-auto w-full transition-transform duration-700 group-hover:scale-105 md:absolute md:inset-0 md:h-full md:w-full md:object-cover md:object-center"
+                className="mx-auto block h-auto w-full max-h-[min(85vh,960px)] object-contain object-center transition-transform duration-700 group-hover:scale-105"
               />
               <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-[#2b1d2e] via-[#2b1d2e]/40 to-transparent" />
               <div className="pointer-events-none absolute inset-0 bg-orange-900/10 mix-blend-overlay" />
