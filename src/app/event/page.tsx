@@ -78,27 +78,15 @@ export default async function Page() {
                 background: "rgba(208, 192, 226, 0.08)",
               }}
             >
-              {bannerUrl ? (
-                <Image
+               <Image
                   src={bannerUrl}
                   alt={event.name}
                   fill
                   sizes="(max-width: 1024px) 92vw, 760px"
-                  style={{ objectFit: "cover" }}
+                  className="object-contain md:object-cover"
                   priority
                   quality={90}
                 />
-              ) : (
-                <Image
-                  src="/images/backtotheroots.jpeg"
-                  alt={event.name}
-                  fill
-                  sizes="(max-width: 1024px) 92vw, 760px"
-                  style={{ objectFit: "cover" }}
-                  priority
-                  quality={90}
-                />
-              )}
               <div
                 className="absolute inset-0"
                 style={{
@@ -141,29 +129,6 @@ export default async function Page() {
                   }
                 >
                   {dateTime}
-                </MetaRow>
-
-                <MetaRow
-                  title="Host"
-                  icon={
-                    <svg
-                      aria-hidden="true"
-                      viewBox="0 0 24 24"
-                      width="18"
-                      height="18"
-                      className="block shrink-0"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M20 21a8 8 0 0 0-16 0" />
-                      <circle cx="12" cy="7" r="4" />
-                    </svg>
-                  }
-                >
-                  {event.created_by}
                 </MetaRow>
 
                 <MetaRow
