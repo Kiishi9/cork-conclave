@@ -61,6 +61,7 @@ export default function AboutPage() {
           <div className="section-header">
             <h2 className="section-title">Meet the Curators</h2>
           </div>
+
           <div className="grid two">
             <div className="card">
               <div className="curator-image-wrapper">
@@ -79,6 +80,7 @@ export default function AboutPage() {
                 world.
               </p>
             </div>
+
             <div className="card">
               <div className="curator-image-wrapper">
                 <Image
@@ -90,6 +92,7 @@ export default function AboutPage() {
                   quality={85}
                 />
               </div>
+
               <h3>Josephine Opeyemi Edwards</h3>
               <p className="muted">
                 Joe likes wine just as much as she likes a million other weird things, and she writes just to keep the
