@@ -11,18 +11,6 @@ export default function Page() {
   return (
     <>
       <section className="relative flex min-h-[90vh] w-full items-center overflow-hidden pt-12 pb-24 lg:pt-0 lg:pb-0">
-        <div className="pointer-events-none absolute top-0 right-0 h-full w-1/3 opacity-20 mix-blend-overlay">
-          <Image
-            src="/images/gallery/IMG_0844.jpg"
-            alt=""
-            fill
-            className="cork-fade-in object-cover"
-            sizes="33vw"
-            priority
-          />
-          <div className="absolute inset-0 bg-linear-to-l from-transparent to-cork-plum" />
-        </div>
-
         <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-12 px-6 lg:grid-cols-12 lg:gap-8 lg:px-12">
           <div className="flex flex-col items-start gap-8 lg:col-span-7">
             <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium tracking-wide text-cork-blush backdrop-blur-sm">
