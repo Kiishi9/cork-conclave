@@ -7,13 +7,33 @@ export default function WineGlass() {
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        d="M12 22V14M12 22H9M12 22H15M12 14C8.68629 14 6 11.3137 6 8C6 4.68629 8.68629 2 12 2C15.3137 2 18 4.68629 18 8C18 11.3137 15.3137 14 12 14ZM12 14V14.5"
+        d="M7.2 3.6C9.6 2.8 14.4 2.8 16.8 3.6"
         stroke="currentColor"
         strokeWidth="0.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <path d="M6 8H18" stroke="currentColor" strokeWidth="0.5" strokeLinecap="round" />
+      <path
+        d="M7.6 3.9C8.1 7.6 8.9 10.3 10.0 11.9C10.7 12.9 11.4 13.5 12 13.8C12.6 13.5 13.3 12.9 14.0 11.9C15.1 10.3 15.9 7.6 16.4 3.9"
+        stroke="currentColor"
+        strokeWidth="0.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M12 13.8V19.6"
+        stroke="currentColor"
+        strokeWidth="0.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M9 21C10.3 20.2 13.7 20.2 15 21"
+        stroke="currentColor"
+        strokeWidth="0.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }
