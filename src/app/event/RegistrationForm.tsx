@@ -262,17 +262,11 @@ export default function RegistrationForm({ className, amountInKobo }: Props) {
       <div className="pt-4">
         <button
           type="submit"
-          className="w-full button justify-center cursor-pointer"
+          className="inline-flex items-center justify-center gap-2 bg-cork-coral px-8 py-3.5 text-sm font-medium tracking-wide text-cork-white transition-all duration-300 hover:bg-cork-coral-hover w-full"
           disabled={isSubmitting}
           aria-disabled={isSubmitting}
         >
-          {isSubmitting
-            ? isFree
-              ? "Registering…"
-              : "Redirecting…"
-            : isFree
-              ? "Register"
-              : "Continue to Payment"}
+          {isSubmitting ? (isFree ? "Registering…" : "Redirecting…") : isFree ? "Register" : "Continue to Payment"}
           <svg
             aria-hidden="true"
             viewBox="0 0 24 24"

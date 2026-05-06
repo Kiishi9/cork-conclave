@@ -1,22 +1,26 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Lora, Manrope } from "next/font/google";
+import "react-phone-number-input/style.css";
+import "@/styles/globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import "react-phone-number-input/style.css";
-import "./globals.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import { site } from "@/lib/site";
-import { Toaster } from "react-hot-toast";
+import Header from "@/_components/Header";
+import Footer from "@/_components/Footer";
+import WineGlass from "@/_components/WineGlass";
+import Providers from "./providers";
 
-const inter = Inter({
-  variable: "--font-sans",
+const manrope = Manrope({
+  variable: "--font-manrope",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
 });
 
-const playfair = Playfair_Display({
-  variable: "--font-serif",
+const lora = Lora({
+  variable: "--font-lora",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
 });
 
 const siteUrl = site.url;
@@ -71,22 +75,25 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en">
-      <body className={`${inter.variable} ${playfair.variable}`}>
+    <html lang="en" className={`${manrope.variable} ${lora.variable} h-full scroll-smooth`}>
+      <body className="min-h-full flex flex-col overflow-x-hidden antialiased">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }} />
-        <div className="site">
-          <Header />
-          <div className="site-body">
-            <main id="main-content" className="main">
-              {children}
-              <Toaster />
-            </main>
-            <Footer />
+        <Providers>
+          <div
+            className="pointer-events-none fixed top-0 left-1/2 -z-10 h-[80vw] w-[80vw] -translate-x-1/2 rounded-full bg-cork-coral opacity-[0.03] blur-[150px]"
+            aria-hidden
+          />
+          <div className="pointer-events-none fixed inset-0 -z-10" aria-hidden>
+            <WineGlass />
           </div>
-        </div>
-        <Analytics />
-        <SpeedInsights />
+          <Header />
+          <main className="grow pt-20">{children}</main>
+
+          <Footer />
+        </Providers>
       </body>
+      <Analytics />
+      <SpeedInsights />
     </html>
   );
 }
