@@ -1,111 +1,164 @@
-import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import { Camera, Mail, MapPin, Video, Wine } from "lucide-react";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Contact",
-  description:
-    "Connect with The Cork Conclave for private tastings, partnerships, and curated gatherings.",
-  alternates: {
-    canonical: `${site.url}/contact`,
-  },
-};
-
-export default function ContactPage() {
-  return (
+function ContactCard({
+  href,
+  icon,
+  title,
+  value,
+  external,
+}: {
+  href?: string;
+  icon: React.ReactNode;
+  title: string;
+  value: string;
+  external?: boolean;
+}) {
+  const inner = (
     <>
-      <section className="hero">
-        <div className="container">
-          <div className="contact-hero-content">
-            <p className="eyebrow">Get in Touch</p>
-            <h1 className="hero-title">We would love to be friends.</h1>
-            <p className="hero-subtitle">
-              Reach out to us with your invitations and collaborations, or just register to attend one of our events. We'd love to hear from you.
+      <div className="flex size-14 items-center justify-center rounded-full border border-white/5 bg-cork-plum text-cork-coral shadow-lg transition-transform group-hover:scale-110">
+        {icon}
+      </div>
+      <div>
+        <h3 className="mb-1 font-medium tracking-wide text-cork-cream">{title}</h3>
+        <p className="text-sm font-light text-cork-blush">{value}</p>
+      </div>
+    </>
+  );
+
+  const cls =
+    "group flex items-center gap-6 rounded-2xl border border-white/5 bg-cork-plum-light/30 p-5 transition-all duration-300 hover:border-white/10 hover:bg-cork-plum-light/60";
+
+  if (!href) return <div className={cls}>{inner}</div>;
+
+  if (external) {
+    return (
+      <a href={href} target="_blank" rel="noreferrer" className={cls}>
+        {inner}
+      </a>
+    );
+  }
+
+  if (href.startsWith("mailto:")) {
+    return (
+      <a href={href} className={cls}>
+        {inner}
+      </a>
+    );
+  }
+
+  return (
+    <Link href={href} className={cls}>
+      {inner}
+    </Link>
+  );
+}
+
+function DirectEmailCard({ email }: { email: string }) {
+  return (
+    <a
+      href={`mailto:${email}`}
+      className="group relative flex flex-col items-start gap-6 overflow-hidden rounded-2xl border border-cork-coral/30 bg-cork-plum-light/50 p-8 shadow-lg transition-all duration-300 hover:border-cork-coral/60 hover:bg-cork-plum-light/80"
+    >
+      <div className="absolute inset-0 bg-linear-to-br from-cork-coral/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+
+      <div className="relative z-10 flex items-center gap-6">
+        <div className="flex size-16 items-center justify-center rounded-full border border-cork-coral/20 bg-cork-plum text-cork-coral shadow-xl transition-all duration-500 group-hover:scale-110 group-hover:bg-cork-coral group-hover:text-cork-cream">
+          <Mail className="size-8" strokeWidth={1.5} aria-hidden />
+        </div>
+
+        <div>
+          <h3 className="mb-2 text-sm font-semibold font-serif tracking-widest text-cork-cream uppercase opacity-80">
+            Direct Email
+          </h3>
+          <p className="mb-2 text-xl font-medium text-cork-coral transition-colors duration-300 group-hover:text-cork-cream sm:text-2xl">
+            {email}
+          </p>
+          <p className="text-sm font-light text-cork-blush">For inquiries, collaborations, and support</p>
+        </div>
+      </div>
+    </a>
+  );
+}
+
+export default function Page() {
+  const email = site.contact.email;
+  const location = `${site.contact.city}, ${site.contact.country}`;
+
+  return (
+    <section className="relative w-full overflow-hidden pt-32 pb-32">
+      <div className="relative z-10 mx-auto grid max-w-7xl items-start gap-16 px-6 lg:grid-cols-2 lg:px-12">
+        <div className="flex flex-col gap-10">
+          <div>
+            <div className="mb-6 inline-flex items-center gap-3">
+              <div className="h-px w-8 bg-cork-coral" />
+              <span className="text-xs font-semibold tracking-widest text-cork-blush uppercase">Contact Us</span>
+            </div>
+
+            <h1 className="mb-6 font-serif text-5xl leading-[1.1] font-medium tracking-tight text-cork-cream sm:text-6xl lg:text-[5rem]">
+              Get in Touch
+            </h1>
+            <p className="max-w-md text-xl leading-relaxed font-light text-cork-blush">
+              Questions, collaborations, or just want to say hi? Reach out directly or connect with us on social.
             </p>
           </div>
+
+          <div className="flex flex-col gap-5">
+            <DirectEmailCard email={email} />
+            <ContactCard
+              href={site.socials.instagram}
+              external
+              title="Instagram"
+              value="@thecorkconclave"
+              icon={<Camera className="size-6" strokeWidth={1.5} aria-hidden />}
+            />
+            <ContactCard
+              href={site.socials.tiktok}
+              external
+              title="TikTok"
+              value="@thecorkconclave"
+              icon={<Video className="size-6" strokeWidth={1.5} aria-hidden />}
+            />
+            <ContactCard
+              title="Location"
+              value={location}
+              icon={<MapPin className="size-6" strokeWidth={1.5} aria-hidden />}
+            />
+          </div>
+
+          <p className="border-l-2 border-cork-coral/30 py-1 pl-4 text-sm text-cork-blush italic">
+            &quot;Follow our community and stay updated on upcoming conclaves.&quot;
+          </p>
         </div>
-      </section>
 
-      <section className="section tight">
-        <div className="container">
-          <div className="contact-grid">
-            <div className="contact-info-card">
-              <h2 className="contact-card-title">Get in Touch</h2>
-              <p className="muted">
-                Email is the fastest way to connect. We respond within two business days.
+        <div className="relative flex h-full flex-col justify-center lg:mt-8">
+          <div className="pointer-events-none absolute -inset-4 -z-10 rounded-3xl bg-linear-to-br from-cork-coral/20 to-transparent opacity-40 blur-2xl" />
+
+          <div className="group relative aspect-4/5 w-full overflow-hidden rounded-4xl border border-white/10 shadow-2xl lg:aspect-3/4">
+            <div className="absolute inset-0 z-10 bg-linear-to-t from-cork-plum via-cork-plum/40 to-transparent opacity-90 transition-opacity duration-700 group-hover:opacity-70" />
+            <Image
+              src="/images/gallery/IMG_0837.jpg"
+              alt="Wine pouring"
+              fill
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="object-cover object-center scale-105 transition-transform duration-1000 ease-out group-hover:scale-100"
+              priority
+            />
+
+            <div className="absolute bottom-0 left-0 right-0 z-20 translate-y-4 p-10 transition-transform duration-700 ease-out group-hover:translate-y-0 md:p-12">
+              <div className="mb-6 flex size-14 items-center justify-center rounded-full border border-cork-coral/30 bg-cork-coral/20 backdrop-blur-md transition-transform duration-500 group-hover:scale-110">
+                <Wine className="size-8 text-cork-coral" strokeWidth={1.25} aria-hidden />
+              </div>
+              <h3 className="mb-3 font-serif text-3xl text-cork-cream">A lifestyle community</h3>
+              <p className="max-w-sm text-base leading-relaxed font-light text-cork-blush">
+                For those who appreciate good wine, great company, and meaningful connections.
               </p>
-
-              <div className="contact-item">
-                <div className="contact-icon">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                    <polyline points="22,6 12,13 2,6"></polyline>
-                  </svg>
-                </div>
-                <div>
-                  <p className="contact-label">Email</p>
-                  <a href={`mailto:${site.contact.email}`} className="contact-link">
-                    {site.contact.email}
-                  </a>
-                </div>
-              </div>
-
-              <div className="contact-item">
-                <div className="contact-icon">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                    <circle cx="12" cy="10" r="3"></circle>
-                  </svg>
-                </div>
-                <div>
-                  <p className="contact-label">Location</p>
-                  <p className="contact-value">{site.contact.city}, {site.contact.country}</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="contact-social-card">
-              <h2 className="contact-card-title">Connect With Us</h2>
-              <p className="muted">
-                Stay updated with our latest events, behind-the-scenes moments, and community highlights.
-              </p>
-
-              <div className="social-links-vertical">
-                <a
-                  className="social-icon-button instagram"
-                  href={site.socials.instagram}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label="Follow us on Instagram"
-                >
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                  </svg>
-                  <div className="social-button-text">
-                    <span className="social-platform">Instagram</span>
-                    <span className="social-handle">@thecorkconclave</span>
-                  </div>
-                </a>
-
-                <a
-                  className="social-icon-button tiktok"
-                  href={site.socials.tiktok}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label="Follow us on TikTok"
-                >
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
-                  </svg>
-                  <div className="social-button-text">
-                    <span className="social-platform">TikTok</span>
-                    <span className="social-handle">@thecorkconclave</span>
-                  </div>
-                </a>
-              </div>
             </div>
           </div>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }

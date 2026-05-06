@@ -1,9 +1,11 @@
+import { app_routes } from "@/lib/constants";
 import { MoveRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function NoEvent() {
   return (
-    <div className="lg:col-span-6 relative order-2 w-full mt-4 lg:mt-0">
+    <div className="lg:col-span-5 relative order-2 w-full mt-4 lg:mt-0">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] rounded-full bg-linear-to-br from-[#e86a5e]/5 to-[#4a1c36]/10 blur-[80px] pointer-events-none z-0" />
 
       <div className="group relative w-full rounded-4xl border border-white/8 bg-[#11070e] overflow-hidden ring-1 ring-white/5 ring-inset shadow-2xl transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_40px_80px_-20px_rgba(232,106,94,0.08)] hover:ring-white/10 z-10 flex flex-col min-h-120 sm:min-h-130">
@@ -75,13 +77,13 @@ export default function NoEvent() {
             </div>
 
             <div className="flex flex-col sm:flex-row items-center gap-3 pt-5 border-t border-white/5">
-              <a
-                href="/gallery"
+              <Link
+                href={app_routes.past_conclaves}
                 className="group/link inline-flex w-full sm:w-auto items-center justify-center gap-2 px-4 py-3.5 text-sm font-normal text-[#bba1b1] hover:text-white transition-colors"
               >
                 Explore Past Conclaves
                 <MoveRight />
-              </a>
+              </Link>
             </div>
           </div>
         </div>

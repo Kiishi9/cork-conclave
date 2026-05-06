@@ -1,9 +1,9 @@
 import { getActiveEvent } from "@/lib/event";
 import NoEvent from "./NoEvent";
-import { Calendar } from "lucide-react";
+import { Calendar, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { formatDateTime } from "@/lib/helpers";
-
+import { app_routes } from "@/lib/constants";
 
 function formatNairaFromKoboString(amountInKobo: string): string {
   const kobo = Number.parseInt(amountInKobo, 10);
@@ -21,7 +21,7 @@ export default async function Event() {
   const bannerUrl = (event.image_url ?? "").trim();
 
   return (
-    <div className="lg:col-span-6 relative order-2 w-full mt-4 lg:mt-0">
+    <div className="lg:col-span-5 relative order-2 w-full mt-4 lg:mt-0">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] rounded-full bg-linear-to-br from-[#e86a5e]/10 to-[#4a1c36]/20 blur-[80px] pointer-events-none z-0" />
 
       <div className="group relative w-full rounded-4xl border border-white/10 bg-[#11070e] overflow-hidden ring-1 ring-white/5 ring-inset shadow-2xl transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_40px_80px_-20px_rgba(232,106,94,0.15)] hover:ring-white/20 z-10 flex flex-col min-h-120 sm:min-h-130">
@@ -78,10 +78,11 @@ export default async function Event() {
 
               <div>
                 <a
-                  href={ctaClosed ? "/" : "/event"}
-                  className="relative inline-flex items-center justify-center gap-2 px-3! py-2! sm:px-5! sm:py-3! button text-xs sm:text-sm font-semibold rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.15)] group-hover:shadow-[0_0_25px_rgba(255,255,255,0.3)] group-hover:bg-[#f2e6ee] shrink-0"
+                  href={ctaClosed ? app_routes.home : app_routes.event}
+                  className="inline-flex items-center justify-center gap-2 bg-cork-coral px-4 lg:px-6 py-3.5 text-xs sm:text-sm font-medium tracking-wide text-cork-white transition-all duration-300 hover:bg-cork-coral-hover"
                 >
                   Save Your Spot
+                  <ArrowRight className="size-5" strokeWidth={1.5} />
                 </a>
               </div>
             </div>

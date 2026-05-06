@@ -12,15 +12,7 @@ function formatNairaFromKoboString(amountInKobo: string): string {
   return new Intl.NumberFormat("en-NG", { style: "currency", currency: "NGN" }).format(naira);
 }
 
-function MetaRow({
-  icon,
-  title,
-  children,
-}: {
-  icon: React.ReactNode;
-  title: string;
-  children: React.ReactNode;
-}) {
+function MetaRow({ icon, title, children }: { icon: React.ReactNode; title: string; children: React.ReactNode }) {
   return (
     <div className="flex items-start gap-3.5">
       <div
@@ -59,7 +51,7 @@ export default async function Page() {
   const price = formatNairaFromKoboString(event.amount_in_kobo);
 
   return (
-    <div>
+    <div className="pt-10 mt-10">
       <div className="relative z-10 grow px-4 pt-2 pb-10 sm:px-6 sm:pb-12 lg:px-8 lg:pt-4 lg:pb-16">
         <div className="mx-auto grid max-w-7xl grid-cols-1 items-start gap-8 lg:grid-cols-14 lg:gap-12">
           <div className="flex flex-col gap-6 lg:col-span-8">
