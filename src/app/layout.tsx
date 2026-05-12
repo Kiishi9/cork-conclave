@@ -9,6 +9,7 @@ import Header from "@/_components/Header";
 import Footer from "@/_components/Footer";
 import WineGlass from "@/_components/WineGlass";
 import Providers from "./providers";
+import { Toaster } from "react-hot-toast";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -78,6 +79,7 @@ export default function RootLayout({
     <html lang="en" className={`${manrope.variable} ${lora.variable} h-full scroll-smooth`}>
       <body className="min-h-full flex flex-col overflow-x-hidden antialiased">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }} />
+        <Toaster />
         <Providers>
           <div
             className="pointer-events-none fixed top-0 left-1/2 -z-10 h-[80vw] w-[80vw] -translate-x-1/2 rounded-full bg-cork-coral opacity-[0.03] blur-[150px]"

@@ -20,13 +20,7 @@ export default function WineGlass() {
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <path
-        d="M12 13.8V19.6"
-        stroke="currentColor"
-        strokeWidth="0.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <path d="M12 13.8V19.6" stroke="currentColor" strokeWidth="0.5" strokeLinecap="round" strokeLinejoin="round" />
       <path
         d="M9 21C10.3 20.2 13.7 20.2 15 21"
         stroke="currentColor"

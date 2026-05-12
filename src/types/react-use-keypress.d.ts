@@ -5,4 +5,3 @@ declare module "react-use-keypress" {
     options?: { event?: "keydown" | "keyup" | "keypress"; target?: EventTarget | null },
   ): void;
 }
-
