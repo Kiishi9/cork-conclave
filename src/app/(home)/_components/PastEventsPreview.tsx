@@ -97,4 +97,3 @@ function PastEventCard({
     </Link>
   );
 }
-

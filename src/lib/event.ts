@@ -33,4 +33,3 @@ export const getActiveEvent = cache(async function getActiveEvent(): Promise<Act
 
   return { ...event, is_registration_cta_closed: isRegistrationCtaClosed(event, Date.now()) };
 });
-

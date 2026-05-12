@@ -89,4 +89,3 @@ export async function getPublicEvents(params: GetPublicEventsParams): Promise<Ev
 
   return result.data;
 }
-

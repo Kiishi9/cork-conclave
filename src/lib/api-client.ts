@@ -8,7 +8,7 @@ export function getPublicApiBaseUrl(): string {
 
 export async function safeFetchJson<T>(
   url: string,
-  init?: RequestInit & { timeoutMs?: number }
+  init?: RequestInit & { timeoutMs?: number },
 ): Promise<ApiResult<T>> {
   const timeoutMs = init?.timeoutMs ?? 10_000;
   const controller = new AbortController();
@@ -34,4 +34,3 @@ export async function safeFetchJson<T>(
     clearTimeout(t);
   }
 }
-

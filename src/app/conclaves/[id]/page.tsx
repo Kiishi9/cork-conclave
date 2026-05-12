@@ -278,9 +278,7 @@ export default function Page() {
                             <MapPin className="w-5 h-5 text-cork-coral" aria-hidden />
                           </div>
                           <div className="flex flex-col pt-0.5">
-                            <span className="text-xs text-cork-blush/70 uppercase tracking-widest mb-1">
-                              Venue
-                            </span>
+                            <span className="text-xs text-cork-blush/70 uppercase tracking-widest mb-1">Venue</span>
                             <span className="text-white font-medium wrap-break-word">
                               {(event?.venue_name ?? "").trim()}
                             </span>
@@ -306,7 +304,9 @@ export default function Page() {
                             <Wine className="w-5 h-5 text-cork-coral" aria-hidden />
                           </div>
                           <div className="flex flex-col pt-0.5">
-                            <span className="text-xs text-cork-blush/70 uppercase tracking-widest mb-1">Dress code</span>
+                            <span className="text-xs text-cork-blush/70 uppercase tracking-widest mb-1">
+                              Dress code
+                            </span>
                             <span className="text-white font-medium">{(event?.dress_code ?? "").trim()}</span>
                           </div>
                         </div>
