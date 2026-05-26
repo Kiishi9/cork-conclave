@@ -76,15 +76,15 @@ export default async function Event() {
                 </span>
               </div>
 
-              <div>
+            {ctaClosed ? <></>:  <div>
                 <a
-                  href={ctaClosed ? app_routes.home : app_routes.event}
+                  href={app_routes.event}
                   className="inline-flex items-center justify-center gap-2 bg-cork-coral px-4 lg:px-6 py-3.5 text-xs sm:text-sm font-medium tracking-wide text-cork-white transition-all duration-300 hover:bg-cork-coral-hover"
                 >
                   Save Your Spot
                   <ArrowRight className="size-5" strokeWidth={1.5} />
                 </a>
-              </div>
+              </div>}
             </div>
           </div>
         </div>
