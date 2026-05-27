@@ -3,7 +3,7 @@
 import { useMemo, useState, type CSSProperties } from "react";
 import toast from "react-hot-toast";
 import PhoneInput, { isValidPhoneNumber, type Value as PhoneValue } from "react-phone-number-input";
-import { ChevronDown, ChevronUp, Minus, Plus, Trash2 } from "lucide-react";
+import { ArrowRight, ChevronDown, ChevronUp, Minus, Plus, Trash2 } from "lucide-react";
 
 import type { EventQuestion } from "@/lib/event";
 
@@ -112,7 +112,7 @@ function newAttendeeDraft(): AttendeeDraft {
   };
 }
 
-export default function RegistrationPanel({ amountInKobo, questions }: Props) {
+export default function RegistrationPanel({ amountInKobo, questions,  }: Props) {
   const baseUrl = useMemo(() => process.env.NEXT_PUBLIC_API_URL?.trim() ?? "", []);
   const isFree = useMemo(() => isFreeEventAmount(amountInKobo), [amountInKobo]);
   const unitPriceLabel = useMemo(() => formatNairaFromKobo(amountInKobo), [amountInKobo]);
@@ -320,6 +320,29 @@ export default function RegistrationPanel({ amountInKobo, questions }: Props) {
     }
   }
 
+  const inputClassName = "w-full rounded-lg px-4 py-3 text-sm";
+
+  const inputStyle: CSSProperties | undefined =  {
+        color: "var(--text)",
+        background: "rgba(208, 192, 226, 0.06)",
+        border: "1px solid var(--border)",
+        outline: "none",
+      };
+      
+  const editorialPhoneShellStyle: CSSProperties = {
+    color: "#fff",
+    background: "transparent",
+    border: "none",
+    borderBottom: "1px solid rgba(255,255,255,0.2)",
+    borderRadius: 0,
+    padding: "0.625rem 0",
+    ["--PhoneInput-color--focus" as keyof CSSProperties]: "#fff",
+    ["--PhoneInputCountryFlag-borderColor" as keyof CSSProperties]: "rgba(255,255,255,0.2)",
+    ["--PhoneInputCountryFlag-borderColor--focus" as keyof CSSProperties]: "#fff",
+    ["--PhoneInputCountrySelectArrow-color" as keyof CSSProperties]: "rgba(255,255,255,0.5)",
+    ["--PhoneInputCountrySelectArrow-color--focus" as keyof CSSProperties]: "#fff",
+  };
+
   return (
     <form className="flex flex-col gap-6" onSubmit={onSubmit}>
       <div className="flex flex-col gap-2">
@@ -331,14 +354,20 @@ export default function RegistrationPanel({ amountInKobo, questions }: Props) {
         </p>
       </div>
 
-      <div className="flex items-center justify-between rounded-xl border px-4 py-4" style={{ borderColor: "var(--border)" }}>
+      <div
+        className="flex items-center justify-between rounded-xl border px-4 py-4"
+        style={{ borderColor: "var(--border)" }}
+      >
         <div className="flex flex-col">
-          <span className="font-medium" style={{ color: "var(--text)" }}>
+         <span className="font-medium" style={{ color: "var(--text)" }}>
             Number of Tickets
           </span>
           <span className="text-sm font-medium text-cork-coral mt-0.5">{unitPriceLabel} each</span>
         </div>
-        <div className="flex items-center gap-2 rounded-lg border p-1" style={{ borderColor: "var(--border)" }}>
+        <div
+          className="flex items-center gap-2 rounded-lg border p-1"
+          style={ { borderColor: "var(--border)" }}
+        >
           <button
             type="button"
             className="flex h-8 w-8 items-center justify-center rounded-md transition-colors hover:bg-white/5"
@@ -348,7 +377,10 @@ export default function RegistrationPanel({ amountInKobo, questions }: Props) {
           >
             <Minus className="h-4 w-4" />
           </button>
-          <span className="w-5 text-center font-semibold" style={{ color: "var(--text)" }}>
+          <span
+            className= "w-5 text-center font-semibold"
+            style={ { color: "var(--text)" }}
+          >
             {ticketCount}
           </span>
           <button
@@ -365,15 +397,24 @@ export default function RegistrationPanel({ amountInKobo, questions }: Props) {
 
       <div className="flex flex-col gap-4">
         {attendees.map((a, index) => {
-          const title = index === 0 ? "Primary Attendee" : `Attendee ${index + 1}`;
+          const title = index === 0
+              ? "Primary Attendee"
+              : `Attendee ${index + 1}`;
           return (
-            <div key={a.id} className="overflow-hidden rounded-xl border" style={{ borderColor: "var(--border)" }}>
+            <div
+              key={a.id}
+              className="overflow-hidden rounded-xl border"
+              style={ { borderColor: "var(--border)" }}
+            >
               <button
                 type="button"
                 className="flex w-full items-center justify-between gap-4 px-4 py-4 text-left transition-colors hover:bg-white/5"
                 onClick={() => toggleOpen(a.id)}
               >
-                <span className="font-medium" style={{ color: "var(--text)" }}>
+                <span
+                  className="font-medium"
+                  style={ { color: "var(--text)" }}
+                >
                   {title}
                 </span>
                 <span className="flex items-center gap-3">
@@ -392,25 +433,23 @@ export default function RegistrationPanel({ amountInKobo, questions }: Props) {
                       <Trash2 className="h-4 w-4 text-cork-coral" />
                     </span>
                   ) : null}
-                  {a.isOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                  {a.isOpen ? (
+                    <ChevronUp className={`h-4 w-4`} />
+                  ) : (
+                    <ChevronDown className={`h-4 w-4`} />
+                  )}
                 </span>
               </button>
 
               {a.isOpen ? (
                 <div className="flex flex-col gap-5 px-4 pb-5">
-                  <div className="flex flex-col gap-2">
-                    <label className="text-[11px] uppercase tracking-widest font-semibold" style={{ color: "var(--muted)" }}>
-                      Full Name
-                    </label>
+                  <div className="flex flex-col gap-2 pt-5">
+                   
                     <input
                       type="text"
-                      className="w-full rounded-lg px-4 py-3 text-sm"
-                      style={{
-                        color: "var(--text)",
-                        background: "rgba(208, 192, 226, 0.06)",
-                        border: "1px solid var(--border)",
-                        outline: "none",
-                      }}
+                      placeholder="Full Name" 
+                      className={inputClassName}
+                      style={inputStyle}
                       value={a.name}
                       onChange={(e) => updateAttendee(a.id, { name: e.target.value })}
                       disabled={isSubmitting}
@@ -420,18 +459,12 @@ export default function RegistrationPanel({ amountInKobo, questions }: Props) {
                   </div>
 
                   <div className="flex flex-col gap-2">
-                    <label className="text-[11px] uppercase tracking-widest font-semibold" style={{ color: "var(--muted)" }}>
-                      Email Address
-                    </label>
+                   
                     <input
                       type="email"
-                      className="w-full rounded-lg px-4 py-3 text-sm"
-                      style={{
-                        color: "var(--text)",
-                        background: "rgba(208, 192, 226, 0.06)",
-                        border: "1px solid var(--border)",
-                        outline: "none",
-                      }}
+                      placeholder="Email Address"
+                      className={inputClassName}
+                      style={inputStyle}
                       value={a.email}
                       onChange={(e) => updateAttendee(a.id, { email: e.target.value })}
                       disabled={isSubmitting}
@@ -441,55 +474,60 @@ export default function RegistrationPanel({ amountInKobo, questions }: Props) {
                   </div>
 
                   <div className="flex flex-col gap-2">
-                    <label className="text-[11px] uppercase tracking-widest font-semibold" style={{ color: "var(--muted)" }}>
-                      Phone Number
-                    </label>
-                    <div className="w-full rounded-lg px-4 py-3 text-sm" style={phoneShellStyle}>
+                    {
+                    <div
+                      className="w-full rounded-lg px-4 py-3 text-sm"
+                      style={ phoneShellStyle}
+                    >
                       <PhoneInput
                         international
                         defaultCountry="NG"
-                        placeholder="Enter phone number"
+                        placeholder={"Enter phone number"}
                         value={a.phone}
                         onChange={(v) => updateAttendee(a.id, { phone: v })}
                         disabled={isSubmitting}
                         autoComplete="tel"
                         numberInputProps={{
                           required: true,
-                          className:
-                            "w-full bg-transparent text-sm outline-none border-0 p-0 focus:ring-0 focus:outline-none placeholder:text-[color:var(--muted)]",
+                          className:  "w-full bg-transparent text-sm outline-none border-0 p-0 focus:ring-0 focus:outline-none placeholder:text-[color:var(--muted)]",
                         }}
                       />
-                    </div>
+                    </div>}
                   </div>
 
                   {sortedQuestions.length > 0 ? (
-                    <div className="pt-4 mt-1 border-t" style={{ borderColor: "var(--border)" }}>
+                    <div className="pt-4 mt-1 border-t"style={ { borderColor: "var(--border)" }}>
                       <div className="flex flex-col gap-6">
-                        <div className="flex flex-col gap-1">
-                          <h4 className="text-[11px] uppercase tracking-widest font-semibold" style={{ color: "var(--muted)" }}>
-                            Event Questions
-                          </h4>
-                        </div>
+                       <div className="flex flex-col gap-1">
+                            <h4 className="text-[11px] uppercase tracking-widest font-semibold" style={{ color: "var(--muted)" }}>
+                              Event Questions
+                            </h4>
+                          </div>
 
                         {sortedQuestions.map((q) => {
                           const resp = a.responses[q.id];
                           return (
                             <div key={q.id} className="flex flex-col gap-2">
-                              <label className="text-[13px] font-medium" style={{ color: "var(--text)" }}>
+                              <label
+                                className="text-[13px] font-medium"
+                                style={ { color: "var(--text)" }}
+                              >
                                 {q.question}{" "}
                                 {q.is_required ? <span className="text-cork-coral" aria-hidden="true">*</span> : null}
                               </label>
 
                               {q.type === "text" ? (
                                 <textarea
-                                  rows={2}
+                                  rows={ 2}
                                   className="w-full rounded-lg px-4 py-3 text-sm resize-none"
-                                  style={{
-                                    color: "var(--text)",
-                                    background: "rgba(208, 192, 226, 0.06)",
-                                    border: "1px solid var(--border)",
-                                    outline: "none",
-                                  }}
+                                  style={
+                                    {
+                                          color: "var(--text)",
+                                          background: "rgba(208, 192, 226, 0.06)",
+                                          border: "1px solid var(--border)",
+                                          outline: "none",
+                                        }
+                                  }
                                   value={resp?.kind === "text" ? resp.value : ""}
                                   onChange={(e) => setResponse(a.id, q, { kind: "text", value: e.target.value })}
                                   disabled={isSubmitting}
@@ -578,37 +616,47 @@ export default function RegistrationPanel({ amountInKobo, questions }: Props) {
         })}
       </div>
 
-      <div className="flex flex-col gap-2 pt-4 border-t" style={{ borderColor: "var(--border)" }}>
-        <div className="flex items-center justify-between text-sm font-medium" style={{ color: "var(--muted)" }}>
-          <span>
-            {ticketCount} {ticketCount === 1 ? "Ticket" : "Tickets"}
-          </span>
-          <span>{totalLabel}</span>
-        </div>
-        <div className="flex items-center justify-between text-xs" style={{ color: "var(--muted)" }}>
-          <span>Price per ticket</span>
-          <span>{unitPriceLabel}</span>
-        </div>
-        <div className="flex items-center justify-between text-base font-semibold pt-1" style={{ color: "var(--text)" }}>
-          <span>Total</span>
-          <span className="text-cork-coral">{totalLabel}</span>
-        </div>
+      <div
+        className={"flex flex-col gap-2 pt-4 border-t"}
+        style={ { borderColor: "var(--border)" }}
+      >
+        <>
+            <div className="flex items-center justify-between text-sm font-medium" style={{ color: "var(--muted)" }}>
+              <span>
+                {ticketCount} {ticketCount === 1 ? "Ticket" : "Tickets"}
+              </span>
+              <span>{totalLabel}</span>
+            </div>
+            <div className="flex items-center justify-between text-xs" style={{ color: "var(--muted)" }}>
+              <span>Price per ticket</span>
+              <span>{unitPriceLabel}</span>
+            </div>
+            <div className="flex items-center justify-between text-base font-semibold pt-1" style={{ color: "var(--text)" }}>
+              <span>Total</span>
+              <span className="text-cork-coral">{totalLabel}</span>
+            </div>
+          </>
       </div>
 
       <button
         type="submit"
-        className="inline-flex items-center justify-center gap-2 bg-cork-coral px-8 py-3.5 text-sm font-medium tracking-wide text-cork-white transition-all duration-300 hover:bg-cork-coral-hover w-full"
+        className={
+         "inline-flex items-center justify-center gap-2 bg-cork-coral px-8 py-3.5 text-sm font-medium tracking-wide text-cork-white transition-all duration-300 hover:bg-cork-coral-hover w-full"
+        }
         disabled={isSubmitting}
         aria-disabled={isSubmitting}
       >
-        {isSubmitting ? (isFree ? "Registering…" : "Redirecting…") : isFree ? "Register" : "Continue to Payment"}
+        {isSubmitting
+          ? isFree
+            ? "Registering…"
+            : "Redirecting…"
+            : isFree
+              ? "Register"
+              : "Continue to Payment"}
+        {!isSubmitting ? <ArrowRight className="w-4 h-4" /> : null}
       </button>
 
-      <div className="pt-2">
-        <p className="text-center text-xs font-medium" style={{ color: "var(--muted)" }}>
-          Your information is secure.
-        </p>
-      </div>
+     
     </form>
   );
 }

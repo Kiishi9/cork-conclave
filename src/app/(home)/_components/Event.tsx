@@ -17,75 +17,73 @@ export default async function Event() {
   if (!event) return <NoEvent />;
 
   const ctaClosed = event.is_registration_cta_closed ?? false;
-
   const bannerUrl = (event.image_url ?? "").trim();
+  const eventName = event.name?.trim() || "Next Conclave";
+  const eventDescription = event.description?.trim() || "";
+  const eventDateTime = formatDateTime(event.event_date);
+  const price = formatNairaFromKoboString(event.amount_in_kobo);
 
   return (
-    <div className="lg:col-span-5 relative order-2 w-full mt-4 lg:mt-0">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] rounded-full bg-linear-to-br from-[#e86a5e]/10 to-[#4a1c36]/20 blur-[80px] pointer-events-none z-0" />
+    <div className="lg:col-span-5 flex justify-center lg:justify-end">
+      <div className="relative w-full max-w-95 lg:max-w-100 mx-auto lg:mr-8 mt-4 lg:mt-0 flex flex-col group">
+        <div className="relative w-full aspect-3/4 rounded-2xl overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8)] border border-white/10 transform -rotate-3 translate-x-1 translate-y-2 transition-all duration-700 ease-out group-hover:rotate-0 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:scale-[1.02] z-10 bg-[#0a0507]">
+          <div className="absolute inset-0 bg-linear-to-tr from-black/30 via-transparent to-white/10 z-10 pointer-events-none" />
 
-      <div className="group relative w-full rounded-4xl border border-white/10 bg-[#11070e] overflow-hidden ring-1 ring-white/5 ring-inset shadow-2xl transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_40px_80px_-20px_rgba(232,106,94,0.15)] hover:ring-white/20 z-10 flex flex-col min-h-120 sm:min-h-130">
-        <Image
-          src={bannerUrl}
-          alt="Back To The Roots"
-          fill
-          sizes="(min-width: 1024px) 50vw, 100vw"
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-50 mix-blend-luminosity group-hover:mix-blend-normal"
-        />
-
-        <div className="absolute inset-0 bg-linear-to-b from-transparent via-[#160811]/70 to-[#160811] z-0" />
-        <div className="absolute inset-0 bg-linear-to-t from-[#11070e] via-[#11070e]/95 to-transparent h-full z-0" />
-
-        <div className="relative z-10 p-6 sm:p-8 flex flex-col h-full justify-end grow">
-          <div className="mb-auto pb-24">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#11070e]/80 backdrop-blur-md border border-white/10 text-white text-xs font-semibold tracking-widest uppercase shadow-xl ring-1 ring-white/5 group-hover:bg-[#11070e] transition-colors">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#e86a5e] opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#e86a5e]"></span>
-              </span>
-              Next Conclave
-            </div>
+          <div className="absolute top-5 left-5 z-20 flex items-center gap-2 bg-black/40 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/10 shadow-xl">
+            <div className="w-1.5 h-1.5 rounded-full bg-[#e85d50] animate-pulse" />
+            <span className="text-xs font-semibold text-white/90 tracking-widest uppercase">Next Conclave</span>
           </div>
 
-          <div className="flex flex-col gap-4 mt-auto">
-            <div className="flex flex-col gap-2.5">
-              <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight text-white leading-[1.05] drop-shadow-lg transition-colors group-hover:text-[#f2e6ee]">
-                {event.name}
-              </h2>
-              <p className="text-sm sm:text-base text-[#bba1b1] leading-relaxed font-light drop-shadow">
-                {event.description}
-              </p>
+          {bannerUrl ? (
+            <Image
+              src={bannerUrl}
+              alt={eventName}
+              fill
+              sizes="(min-width: 1024px) 400px, 92vw"
+              className="object-contain object-center transition-transform duration-1000 ease-out group-hover:scale-[1.02]"
+              priority
+            />
+          ) : (
+            <div className="absolute inset-0 bg-linear-to-br from-[#2a0f1d] via-[#11070e] to-[#0a0507]" />
+          )}
+        </div>
+
+        <div className="relative z-20 w-[92%] mx-auto sm:w-[108%] sm:ml-[-4%] sm:mr-auto -mt-20 sm:-mt-10 bg-[#1f1117]/40 backdrop-blur-xl rounded-2xl p-6 sm:p-8 shadow-[0_20px_50px_-10px_rgba(0,0,0,0.5)] border border-white/10 flex flex-col gap-4 transform transition-all duration-700 ease-out group-hover:-translate-y-2">
+          <div>
+            <h3 className="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-white/95 mb-1.5 leading-snug">
+              {eventName}
+            </h3>
+
+            {eventDescription ? (
+              <p className="text-[13px] text-white/60 line-clamp-2 leading-relaxed font-light">{eventDescription}</p>
+            ) : null}
+          </div>
+
+          <div className="flex items-center gap-2 text-white/60">
+            <Calendar className="w-3.5 h-3.5 text-[#e85d50]/80" strokeWidth={1.5} />
+            <span className="text-[13px] font-light tracking-wide text-white/70">{eventDateTime}</span>
+          </div>
+
+          <div className="pt-5 border-t border-white/5 flex items-center justify-between mt-1 gap-4">
+            <div className="flex flex-col">
+              <span className="text-[9px] text-white/50 mb-0.5 font-medium uppercase tracking-[0.2em]">
+                Guest Pass
+              </span>
+              <span className="text-lg font-medium tracking-tight text-white/90 flex items-baseline">
+                {price}
+                <span className="text-[10px] text-white/40 font-normal ml-1">/ guest</span>
+              </span>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 py-4">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-[#d1b3c4] border border-white/5 group-hover:bg-white/10 group-hover:text-white transition-colors shrink-0">
-                  <Calendar />
-                </div>
-                <span className="text-sm font-medium text-[#f2e6ee] leading-tight drop-shadow-sm">
-                  {formatDateTime(event.event_date)}
-                </span>
-              </div>
-            </div>
-
-            <div className="flex flex-row items-center justify-between gap-4 pt-1">
-              <div className="flex flex-col">
-                <span className="text-lg sm:text-3xl font-semibold text-white tracking-tight drop-shadow-md">
-                  {formatNairaFromKoboString(event.amount_in_kobo)}{" "}
-                  <span className="text-sm font-medium text-[#bba1b1] tracking-normal">/ guest</span>
-                </span>
-              </div>
-
-            {ctaClosed ? <></>:  <div>
-                <a
-                  href={app_routes.event}
-                  className="inline-flex items-center justify-center gap-2 bg-cork-coral px-4 lg:px-6 py-3.5 text-xs sm:text-sm font-medium tracking-wide text-cork-white transition-all duration-300 hover:bg-cork-coral-hover"
-                >
-                  Save Your Spot
-                  <ArrowRight className="size-5" strokeWidth={1.5} />
-                </a>
-              </div>}
-            </div>
+            {ctaClosed ? null : (
+              <a
+                href={app_routes.event}
+                className="bg-[#e85d50] hover:bg-[#d64c3f] transition-all duration-300 text-white px-5 py-2.5 rounded-lg text-[13px] font-medium flex items-center gap-2 shadow-lg shadow-[#e85d50]/20 hover:shadow-xl hover:shadow-[#e85d50]/30 hover:-translate-y-0.5 shrink-0"
+              >
+                RSVP
+                <ArrowRight className="w-3.5 h-3.5" strokeWidth={1.5} />
+              </a>
+            )}
           </div>
         </div>
       </div>

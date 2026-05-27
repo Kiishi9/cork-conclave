@@ -13,6 +13,8 @@ export type ActiveEvent = {
   created_by: string;
   amount_in_kobo: string;
   image_url?: string | null;
+  venue_name?: string | null;
+  venue_address?: string | null;
   registration_opens_at?: string | null;
   registration_closes_at?: string | null;
   is_registration_cta_closed?: boolean;
