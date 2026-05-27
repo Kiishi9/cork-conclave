@@ -91,13 +91,19 @@ export default async function Page() {
                 {event.name}
               </h1>
 
-              {event.description ? (
-                <div className="prose prose-invert prose-lg mt-6 max-w-none leading-relaxed">
-                  <p className="text-base leading-relaxed" style={{ color: "var(--muted)" }}>
-                    {event.description}
-                  </p>
-                </div>
-              ) : null}
+             {event.description ? (
+  <div className="mt-6 space-y-4">
+    {event.description.split("\n\n").map((paragraph, index) => (
+      <p
+        key={index}
+        className="text-sm leading-relaxed font-light md:text-base"
+        style={{ color: "var(--muted)" }}
+      >
+        {paragraph}
+      </p>
+    ))}
+  </div>
+) : null}
 
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-5 border-t border-white/10 mt-1 pb-4">
                 <MetaItem label="Date">{eventDate}</MetaItem>
