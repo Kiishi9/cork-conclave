@@ -3,6 +3,7 @@ export const app_routes = {
   about: "/about",
   event: "/event",
   gallery: "/gallery",
+  wines: "/wines",
   contact: "/contact",
   past_conclaves: "/conclaves",
 };
