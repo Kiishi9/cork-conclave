@@ -2,6 +2,7 @@ import Image from "next/image";
 import type { ReactNode } from "react";
 import { redirect } from "next/navigation";
 import { getActiveEvent, getActiveEventQuestions } from "@/lib/event";
+import InviteRegistrationPanel from "./InviteRegistrationPanel";
 import RegistrationPanel from "./RegistrationPanel";
 
 const EVENT_DISPLAY_TIMEZONE = "Africa/Lagos";
@@ -48,9 +49,12 @@ function MetaItem({ label, children }: { label: string; children: ReactNode }) {
   );
 }
 
-export default async function Page() {
+export default async function Page({ searchParams }: { searchParams: Promise<{ invite?: string }> }) {
+  const params = await searchParams;
+  const inviteToken = params.invite?.trim() ?? "";
+
   const event = await getActiveEvent();
-  if (!event) {
+  if (!event || event.is_registration_cta_closed) {
     redirect("/");
   }
 
@@ -110,7 +114,9 @@ export default async function Page() {
                 <MetaItem label="Time">{eventTime}</MetaItem>
                 <div className="flex flex-col gap-2">
                   <span className="text-[10px] text-gray-300 uppercase tracking-widest font-semibold">Ticket</span>
-                  <span className="text-[#ff545a] font-medium text-sm md:text-base">{price}</span>
+                  <span className="text-[#ff545a] font-medium text-sm md:text-base">
+                    {inviteToken ? "Complimentary invite" : price}
+                  </span>
                 </div>
               </div>
             </div>
@@ -118,7 +124,11 @@ export default async function Page() {
 
           <div className="lg:col-span-5">
             <div className="bg-white/3 backdrop-blur-3xl border border-white/8 rounded-4xl p-6 lg:p-8 flex flex-col shadow-[0_20px_50px_rgba(0,0,0,0.4)] relative max-h-[85vh] overflow-y-auto lg:sticky lg:top-8 [scrollbar-width:thin] [scrollbar-color:rgba(255,255,255,0.1)_transparent]">
-              <RegistrationPanel amountInKobo={event.amount_in_kobo} questions={questions} />
+              {inviteToken ? (
+                <InviteRegistrationPanel token={inviteToken} />
+              ) : (
+                <RegistrationPanel amountInKobo={event.amount_in_kobo} questions={questions} />
+              )}
             </div>
           </div>
         </div>

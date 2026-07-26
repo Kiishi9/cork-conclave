@@ -53,6 +53,13 @@ export default function Footer() {
               >
                 Gallery
               </Link>
+
+              <Link
+                href={app_routes.wines}
+                className="text-sm font-light text-cork-blush transition-colors hover:text-cork-coral"
+              >
+                Wines
+              </Link>
             </div>
 
             <div className="flex flex-col gap-4">

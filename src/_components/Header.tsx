@@ -9,6 +9,7 @@ import Logo from "./icons/Logo";
 const navLinks = [
   { href: app_routes.about, label: "About" },
   { href: app_routes.gallery, label: "Gallery" },
+  { href: app_routes.wines, label: "Wines" },
   { href: app_routes.past_conclaves, label: "Past Conclaves" },
   { href: app_routes.contact, label: "Contact" },
 ];
@@ -62,6 +63,12 @@ export default function Header() {
               </Link>
               <Link href={app_routes.gallery} className="hover:text-cork-cream">
                 Gallery
+              </Link>
+              <Link href={app_routes.wines} className="hover:text-cork-cream">
+                Wines
+              </Link>
+              <Link href={app_routes.contact} className="hover:text-cork-cream">
+                Contact
               </Link>
               <a
                 href="https://instagram.com"
