@@ -106,48 +106,44 @@ function StarRow({
   size?: "sm" | "lg";
   interactive?: boolean;
   value?: number | null;
-  onChange?: (n: number) => void;
+  onChange?: (n: number | null) => void;
 }) {
   const display = interactive ? (value ?? 0) : (rating ?? 0);
   const iconClass = size === "lg" ? "h-8 w-8" : "h-3.5 w-3.5";
 
   if (interactive) {
+    const select = (next: number) => {
+      onChange?.(value === next ? null : next);
+    };
     return (
-      <div className="flex items-center gap-2">
-        <button
-          type="button"
-          aria-label="Rate 0 stars"
-          onClick={() => onChange?.(0)}
-          className={`rounded-full border px-2 py-1 text-[10px] tracking-widest uppercase transition-colors ${
-            value != null && value === 0
-              ? "border-cork-coral/40 bg-cork-coral/10 text-cork-coral"
-              : "border-white/10 text-cork-blush/60 hover:border-cork-coral/30 hover:text-cork-coral"
-          }`}
-        >
-          0
-        </button>
-        {Array.from({ length: 5 }, (_, i) => {
-          const fullValue = i + 1;
-          const halfValue = i + 0.5;
-          const fill = starFill(value ?? 0, i);
-          return (
-            <span key={fullValue} className={`relative inline-flex ${iconClass}`}>
-              <StarIcon fill={fill} className={iconClass} />
-              <button
-                type="button"
-                aria-label={`Rate ${halfValue} stars`}
-                onClick={() => onChange?.(halfValue)}
-                className="absolute inset-y-0 left-0 z-10 w-1/2"
-              />
-              <button
-                type="button"
-                aria-label={`Rate ${fullValue} stars`}
-                onClick={() => onChange?.(fullValue)}
-                className="absolute inset-y-0 right-0 z-10 w-1/2"
-              />
-            </span>
-          );
-        })}
+      <div className="flex flex-col gap-2">
+        <div className="flex items-center gap-2">
+          {Array.from({ length: 5 }, (_, i) => {
+            const fullValue = i + 1;
+            const halfValue = i + 0.5;
+            const fill = starFill(value ?? 0, i);
+            return (
+              <span key={fullValue} className={`relative inline-flex ${iconClass}`}>
+                <StarIcon fill={fill} className={iconClass} />
+                <button
+                  type="button"
+                  aria-label={`Rate ${halfValue} stars`}
+                  onClick={() => select(halfValue)}
+                  className="absolute inset-y-0 left-0 z-10 w-1/2"
+                />
+                <button
+                  type="button"
+                  aria-label={`Rate ${fullValue} stars`}
+                  onClick={() => select(fullValue)}
+                  className="absolute inset-y-0 right-0 z-10 w-1/2"
+                />
+              </span>
+            );
+          })}
+        </div>
+        <p className="text-xs text-cork-blush/60">
+          {value == null ? "No stars selected — submit to rate 0." : `${value.toFixed(1)} selected. Click again to clear.`}
+        </p>
       </div>
     );
   }
@@ -372,10 +368,10 @@ function EventTicketPageInner() {
   }
 
   async function submitReview() {
-    if (!eventId || !ticketToken || !featuredWine || myRating == null) return;
+    if (!eventId || !ticketToken || !featuredWine) return;
     setSubmitting(true);
     setSubmitError(null);
-    const rating = myRating;
+    const rating = myRating ?? 0;
     const comment = notes.trim() ? notes.trim() : null;
     const result = await upsertPublicWineReview(eventId, featuredWine.event_wine_id, ticketToken, {
       rating,
@@ -624,7 +620,7 @@ function EventTicketPageInner() {
                 <div className="rounded-3xl border border-white/10 bg-cork-plum/50 p-6 shadow-sm md:p-8">
                   <div className="mb-5 flex items-center justify-between">
                     <h4 className="font-medium tracking-tight text-cork-cream">My Review</h4>
-                    <span className="text-xs text-cork-blush/60">Tell everyone what you think.</span>
+                    <span className="text-xs text-cork-blush/60">Stars are optional.</span>
                   </div>
 
                   <div className="mb-6">
@@ -642,7 +638,7 @@ function EventTicketPageInner() {
 
                   <button
                     type="button"
-                    disabled={myRating == null || submitting}
+                    disabled={submitting}
                     onClick={() => void submitReview()}
                     className="w-full rounded-full bg-cork-coral px-8 py-3 text-sm font-medium text-cork-white shadow-md shadow-cork-coral/20 transition-colors hover:bg-cork-coral-hover disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
                   >
