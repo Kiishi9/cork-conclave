@@ -65,41 +65,87 @@ function wineStatus(wine: PublicEventWineListItem, samplingId: string | null): W
   return "not_reviewed";
 }
 
+function starFill(rating: number, index: number): "full" | "half" | "empty" {
+  const threshold = index + 1;
+  if (rating >= threshold) return "full";
+  if (rating >= threshold - 0.5) return "half";
+  return "empty";
+}
+
+function StarIcon({
+  fill,
+  className,
+}: {
+  fill: "full" | "half" | "empty";
+  className: string;
+}) {
+  if (fill === "full") {
+    return <Star className={`${className} fill-cork-coral text-cork-coral`} strokeWidth={1.5} />;
+  }
+  if (fill === "half") {
+    return (
+      <span className={`relative inline-flex ${className}`}>
+        <Star className={`${className} text-cork-blush/30`} strokeWidth={1.5} />
+        <span className="absolute inset-0 overflow-hidden" style={{ width: "50%" }}>
+          <Star className={`${className} fill-cork-coral text-cork-coral`} strokeWidth={1.5} />
+        </span>
+      </span>
+    );
+  }
+  return <Star className={`${className} text-cork-blush/30`} strokeWidth={1.5} />;
+}
+
 function StarRow({
   rating,
   size = "sm",
   interactive = false,
-  value = 0,
+  value = null,
   onChange,
 }: {
   rating?: number;
   size?: "sm" | "lg";
   interactive?: boolean;
-  value?: number;
+  value?: number | null;
   onChange?: (n: number) => void;
 }) {
-  const count = interactive ? 5 : Math.round(rating ?? 0);
+  const display = interactive ? (value ?? 0) : (rating ?? 0);
   const iconClass = size === "lg" ? "h-8 w-8" : "h-3.5 w-3.5";
 
   if (interactive) {
     return (
       <div className="flex items-center gap-2">
+        <button
+          type="button"
+          aria-label="Rate 0 stars"
+          onClick={() => onChange?.(0)}
+          className={`rounded-full border px-2 py-1 text-[10px] tracking-widest uppercase transition-colors ${
+            value != null && value === 0
+              ? "border-cork-coral/40 bg-cork-coral/10 text-cork-coral"
+              : "border-white/10 text-cork-blush/60 hover:border-cork-coral/30 hover:text-cork-coral"
+          }`}
+        >
+          0
+        </button>
         {Array.from({ length: 5 }, (_, i) => {
-          const n = i + 1;
-          const filled = n <= value;
+          const fullValue = i + 1;
+          const halfValue = i + 0.5;
+          const fill = starFill(value ?? 0, i);
           return (
-            <button
-              key={n}
-              type="button"
-              aria-label={`Rate ${n} stars`}
-              onClick={() => onChange?.(n)}
-              className="transition-colors"
-            >
-              <Star
-                className={`${iconClass} ${filled ? "fill-cork-coral text-cork-coral" : "text-cork-blush/30 hover:text-cork-coral"}`}
-                strokeWidth={1.5}
+            <span key={fullValue} className={`relative inline-flex ${iconClass}`}>
+              <StarIcon fill={fill} className={iconClass} />
+              <button
+                type="button"
+                aria-label={`Rate ${halfValue} stars`}
+                onClick={() => onChange?.(halfValue)}
+                className="absolute inset-y-0 left-0 z-10 w-1/2"
               />
-            </button>
+              <button
+                type="button"
+                aria-label={`Rate ${fullValue} stars`}
+                onClick={() => onChange?.(fullValue)}
+                className="absolute inset-y-0 right-0 z-10 w-1/2"
+              />
+            </span>
           );
         })}
       </div>
@@ -108,11 +154,8 @@ function StarRow({
 
   return (
     <div className="flex items-center gap-0.5 text-cork-coral">
-      {Array.from({ length: count }, (_, i) => (
-        <Star key={i} className={`${iconClass} fill-cork-coral`} strokeWidth={1.5} />
-      ))}
-      {Array.from({ length: 5 - count }, (_, i) => (
-        <Star key={`empty-${i}`} className={`${iconClass} text-cork-blush/30`} strokeWidth={1.5} />
+      {Array.from({ length: 5 }, (_, i) => (
+        <StarIcon key={i} fill={starFill(display, i)} className={iconClass} />
       ))}
     </div>
   );
@@ -153,7 +196,7 @@ function EventTicketPageInner() {
   const [loadError, setLoadError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [myRating, setMyRating] = useState(0);
+  const [myRating, setMyRating] = useState<number | null>(null);
   const [notes, setNotes] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -283,7 +326,7 @@ function EventTicketPageInner() {
         return;
       }
       setWineDetail(result.data);
-      setMyRating(result.data.my_review?.rating ?? 0);
+      setMyRating(result.data.my_review ? result.data.my_review.rating : null);
       setNotes(result.data.my_review?.comment ?? "");
       setSubmitError(null);
     }
@@ -329,7 +372,7 @@ function EventTicketPageInner() {
   }
 
   async function submitReview() {
-    if (!eventId || !ticketToken || !featuredWine || myRating < 1) return;
+    if (!eventId || !ticketToken || !featuredWine || myRating == null) return;
     setSubmitting(true);
     setSubmitError(null);
     const rating = myRating;
@@ -361,7 +404,7 @@ function EventTicketPageInner() {
         };
       }),
     );
-    setMyRating(0);
+    setMyRating(null);
     setNotes("");
     setSubmitError(null);
 
@@ -370,7 +413,7 @@ function EventTicketPageInner() {
     if (detail.ok) {
       setWineDetail(detail.data);
       // Keep the form cleared after a successful submit; re-selecting the wine will reload notes.
-      setMyRating(0);
+      setMyRating(null);
       setNotes("");
     }
   }
@@ -599,7 +642,7 @@ function EventTicketPageInner() {
 
                   <button
                     type="button"
-                    disabled={myRating < 1 || submitting}
+                    disabled={myRating == null || submitting}
                     onClick={() => void submitReview()}
                     className="w-full rounded-full bg-cork-coral px-8 py-3 text-sm font-medium text-cork-white shadow-md shadow-cork-coral/20 transition-colors hover:bg-cork-coral-hover disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
                   >
@@ -684,11 +727,9 @@ function EventTicketPageInner() {
                           <span className="font-medium text-cork-cream">{wine.average_rating.toFixed(1)}</span>
                           <span className="text-cork-blush/60">({wine.review_count})</span>
                         </div>
-                        {wine.my_rating ? (
-                          <div className="flex gap-0.5 text-[10px] text-cork-coral">
-                            {Array.from({ length: wine.my_rating }, (_, i) => (
-                              <span key={i}>★</span>
-                            ))}
+                        {wine.my_rating != null ? (
+                          <div className="text-[10px] font-medium text-cork-coral tabular-nums">
+                            {wine.my_rating.toFixed(1)}★
                           </div>
                         ) : null}
                       </div>

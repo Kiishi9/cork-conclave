@@ -31,25 +31,41 @@ function wineTypeBadgeClass(type: string): string {
   return "text-cork-coral bg-cork-coral/10 border-cork-coral/20";
 }
 
+function starFill(rating: number, index: number): "full" | "half" | "empty" {
+  const threshold = index + 1;
+  if (rating >= threshold) return "full";
+  if (rating >= threshold - 0.5) return "half";
+  return "empty";
+}
+
 function StarRow({ rating, size = "sm" }: { rating: number; size?: "sm" | "md" }) {
-  const filled = Math.round(rating);
   const iconClass = size === "md" ? "h-4 w-4" : "h-3.5 w-3.5";
   return (
     <div className="flex items-center gap-0.5 text-cork-coral">
-      {Array.from({ length: 5 }, (_, i) => (
-        <Star
-          key={i}
-          className={`${iconClass} ${i < filled ? "fill-cork-coral text-cork-coral" : "text-cork-blush/30"}`}
-          strokeWidth={1.5}
-          aria-hidden
-        />
-      ))}
+      {Array.from({ length: 5 }, (_, i) => {
+        const fill = starFill(rating, i);
+        if (fill === "full") {
+          return <Star key={i} className={`${iconClass} fill-cork-coral text-cork-coral`} strokeWidth={1.5} aria-hidden />;
+        }
+        if (fill === "half") {
+          return (
+            <span key={i} className={`relative inline-flex ${iconClass}`}>
+              <Star className={`${iconClass} text-cork-blush/30`} strokeWidth={1.5} aria-hidden />
+              <span className="absolute inset-0 overflow-hidden" style={{ width: "50%" }}>
+                <Star className={`${iconClass} fill-cork-coral text-cork-coral`} strokeWidth={1.5} aria-hidden />
+              </span>
+            </span>
+          );
+        }
+        return <Star key={i} className={`${iconClass} text-cork-blush/30`} strokeWidth={1.5} aria-hidden />;
+      })}
     </div>
   );
 }
 
 function starLabel(stars: number): string {
-  return "★".repeat(stars) + "☆".repeat(5 - stars);
+  if (stars <= 0) return "☆☆☆☆☆";
+  return "★".repeat(stars) + "☆".repeat(Math.max(0, 5 - stars));
 }
 
 function formatLastSampled(value?: string | null): string {
