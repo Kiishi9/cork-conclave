@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { Banknote, CalendarDays, ChevronLeft, ChevronRight, Clock, MapPin, Wine, X } from "lucide-react";
+import { EVENT_DISPLAY_TIMEZONE } from "@/lib/timezone";
 
 type PublicEventGalleryItem = {
   url: string;
@@ -145,17 +146,30 @@ export default function Page() {
 
   const monthLabel = useMemo(() => {
     if (!eventDate || Number.isNaN(eventDate.getTime())) return "";
-    return eventDate.toLocaleString(undefined, { month: "long", year: "numeric" });
+    return eventDate.toLocaleString(undefined, {
+      month: "long",
+      year: "numeric",
+      timeZone: EVENT_DISPLAY_TIMEZONE,
+    });
   }, [eventDate]);
 
   const dateLabel = useMemo(() => {
     if (!eventDate || Number.isNaN(eventDate.getTime())) return "";
-    return eventDate.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
+    return eventDate.toLocaleDateString(undefined, {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+      timeZone: EVENT_DISPLAY_TIMEZONE,
+    });
   }, [eventDate]);
 
   const timeLabel = useMemo(() => {
     if (!eventDate || Number.isNaN(eventDate.getTime())) return "—";
-    return eventDate.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
+    return eventDate.toLocaleTimeString(undefined, {
+      hour: "numeric",
+      minute: "2-digit",
+      timeZone: EVENT_DISPLAY_TIMEZONE,
+    });
   }, [eventDate]);
 
   const amountLabel = useMemo(() => {

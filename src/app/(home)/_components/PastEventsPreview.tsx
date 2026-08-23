@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { ArrowUpRight } from "lucide-react";
 import { app_routes } from "@/lib/constants";
 import { getPublicEvents } from "@/lib/public-events";
+import { EVENT_DISPLAY_TIMEZONE } from "@/lib/timezone";
 
 function formatEventDate(value?: string): string {
   if (!value) return "—";
@@ -14,7 +15,7 @@ function formatEventDate(value?: string): string {
   return new Intl.DateTimeFormat(undefined, {
     dateStyle: "medium",
     timeStyle: "short",
-    timeZone: "Africa/Lagos",
+    timeZone: EVENT_DISPLAY_TIMEZONE,
   }).format(d);
 }
 

@@ -15,6 +15,7 @@ import {
   type PublicEventWineListItem,
   type WineReviewItem,
 } from "@/lib/public-ticket";
+import { EVENT_DISPLAY_TIMEZONE } from "@/lib/timezone";
 
 type WineCardStatus = "sampling" | "reviewed" | "not_reviewed";
 
@@ -26,6 +27,7 @@ function formatEventWhen(iso: string) {
     day: "numeric",
     hour: "numeric",
     minute: "2-digit",
+    timeZone: EVENT_DISPLAY_TIMEZONE,
   });
 }
 
@@ -36,6 +38,7 @@ function formatShortDate(iso: string) {
     month: "short",
     day: "numeric",
     year: "numeric",
+    timeZone: EVENT_DISPLAY_TIMEZONE,
   });
 }
 
@@ -550,7 +553,9 @@ function EventTicketPageInner() {
                 {featuredWine.event_wine_id === samplingId ? "Currently Being Sampled" : "Wine Details"}
               </h2>
               <p className="text-sm font-medium text-cork-blush">
-                Updates as the host introduces new wines.
+                {event.status === "completed"
+                  ? "Event ended — you can still rate the wines."
+                  : "Updates as the host introduces new wines."}
               </p>
             </div>
             {featuredWine.event_wine_id === samplingId ? (

@@ -2,10 +2,9 @@ import Image from "next/image";
 import type { ReactNode } from "react";
 import { redirect } from "next/navigation";
 import { getActiveEvent, getActiveEventQuestions } from "@/lib/event";
+import { EVENT_DISPLAY_TIMEZONE } from "@/lib/timezone";
 import InviteRegistrationPanel from "./InviteRegistrationPanel";
 import RegistrationPanel from "./RegistrationPanel";
-
-const EVENT_DISPLAY_TIMEZONE = "Africa/Lagos";
 
 function formatNairaFromKoboString(amountInKobo: string): string {
   const kobo = Number.parseInt(amountInKobo, 10);

@@ -1,7 +1,7 @@
 import "server-only";
 import type { ImageProps } from "./types";
+import { EVENT_DISPLAY_TIMEZONE } from "./timezone";
 
-const EVENT_DISPLAY_TIMEZONE = "Africa/Lagos";
 const cache = new Map<string, string>();
 
 export function formatDateTime(value?: string): string {
