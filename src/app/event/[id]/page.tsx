@@ -766,7 +766,7 @@ function EventTicketPageInner() {
         aria-hidden={!drawerOpen}
       >
         <div className="sticky top-0 z-10 flex items-center justify-between border-b border-white/10 bg-cork-plum/90 px-6 py-5 backdrop-blur-md">
-          <h3 className="text-lg font-medium tracking-tight text-cork-cream">Community Reviews</h3>
+          <h3 className="text-lg font-medium tracking-tight text-cork-cream">Wine details</h3>
           <button
             type="button"
             onClick={closeDrawer}
@@ -811,9 +811,37 @@ function EventTicketPageInner() {
                 </div>
               </div>
 
+              <div className="mb-8 rounded-3xl border border-white/10 bg-cork-plum/50 p-5 shadow-sm md:p-6">
+                <div className="mb-5 flex items-center justify-between">
+                  <h4 className="font-medium tracking-tight text-cork-cream">My Review</h4>
+                  <span className="text-xs text-cork-blush/60">Stars are optional.</span>
+                </div>
+
+                <div className="mb-6">
+                  <StarRow interactive size="lg" value={myRating} onChange={setMyRating} />
+                </div>
+
+                <textarea
+                  value={notes}
+                  onChange={(e) => setNotes(e.target.value)}
+                  placeholder="Add your tasting notes (optional)..."
+                  className="mb-5 h-24 w-full resize-none rounded-2xl border border-white/10 bg-white/5 p-4 text-sm font-light text-cork-cream shadow-sm transition-all placeholder:text-cork-blush/40 focus:border-cork-coral focus:ring-1 focus:ring-cork-coral focus:outline-none"
+                />
+
+                {submitError ? <p className="mb-3 text-sm text-cork-coral">{submitError}</p> : null}
+
+                <button
+                  type="button"
+                  disabled={submitting}
+                  onClick={() => void submitReview()}
+                  className="w-full rounded-full bg-cork-coral px-8 py-3 text-sm font-medium text-cork-white shadow-md shadow-cork-coral/20 transition-colors hover:bg-cork-coral-hover disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  {submitting ? "Saving…" : featuredWine.reviewed_by_user ? "Update Review" : "Submit Review"}
+                </button>
+              </div>
+
               <div className="mb-8 flex items-center justify-between">
                 <span className="text-sm font-medium text-cork-cream">Latest Comments</span>
-               
               </div>
 
               <div className="space-y-8">
