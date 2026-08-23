@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { ArrowRight, Calendar, MapPin, Search, Wine } from "lucide-react";
 import { getPublicEvents, lagosYearRangeRfc3339 } from "@/lib/public-events";
+import { EVENT_DISPLAY_TIMEZONE } from "@/lib/timezone";
 
 function useDebouncedValue<T>(value: T, delayMs: number): T {
   const [debounced, setDebounced] = useState(value);
@@ -21,7 +22,7 @@ function formatEventDate(value?: string): string {
   if (Number.isNaN(d.getTime())) return value;
   return new Intl.DateTimeFormat(undefined, {
     dateStyle: "medium",
-    timeZone: "Africa/Lagos",
+    timeZone: EVENT_DISPLAY_TIMEZONE,
   }).format(d);
 }
 

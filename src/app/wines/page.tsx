@@ -10,6 +10,7 @@ import {
   type PublicWineListItem,
 } from "@/lib/public-wines";
 import { cloudinaryDisplayUrl } from "@/lib/public-ticket";
+import { EVENT_DISPLAY_TIMEZONE } from "@/lib/timezone";
 
 type SortOption = "average_rating" | "review_count" | "year";
 
@@ -75,7 +76,7 @@ function formatLastSampled(value?: string | null): string {
   return new Intl.DateTimeFormat(undefined, {
     month: "short",
     year: "2-digit",
-    timeZone: "Africa/Lagos",
+    timeZone: EVENT_DISPLAY_TIMEZONE,
   }).format(d);
 }
 
@@ -86,7 +87,7 @@ function formatReviewDate(value: string): string {
     month: "short",
     day: "numeric",
     year: "numeric",
-    timeZone: "Africa/Lagos",
+    timeZone: EVENT_DISPLAY_TIMEZONE,
   }).format(d);
 }
 
@@ -96,7 +97,7 @@ function formatHistoryDate(value: string): string {
   return new Intl.DateTimeFormat(undefined, {
     month: "short",
     year: "numeric",
-    timeZone: "Africa/Lagos",
+    timeZone: EVENT_DISPLAY_TIMEZONE,
   }).format(d);
 }
 
